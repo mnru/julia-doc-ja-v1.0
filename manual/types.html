@@ -318,7 +318,7 @@ Polar{Float64} complex number:
    3.0 * exp(4.0im)
 
 julia&gt; print(:($a^2))
-3.0 * exp(4.0im) ^ 2</code></pre><p>Because the operator <code>^</code> has higher precedence than <code>*</code> (see <a href="mathematical-operations.html#Operator-Precedence-and-Associativity-1">Operator Precedence and Associativity</a>), this output does not faithfully represent the expression <code>a ^ 2</code> which should be equal to <code>(3.0 * exp(4.0im)) ^ 2</code>.  To solve this issue, we must make a custom method for <code>Base.show_unquoted(io::IO, z::Polar, indent::Int, precedence::Int)</code>, which is called internally by the expression object when printing:</p><pre><code class="language-julia-repl">julia&gt; function Base.show_unquoted(io::IO, z::Polar, ::Int, precedence::Int)
+3.0 * exp(4.0im) ^ 2</code></pre><p>Because the operator <code>^</code> has higher precedence than <code>*</code> (see <a href="manual/@ref">Operator Precedence and Associativity</a>), this output does not faithfully represent the expression <code>a ^ 2</code> which should be equal to <code>(3.0 * exp(4.0im)) ^ 2</code>.  To solve this issue, we must make a custom method for <code>Base.show_unquoted(io::IO, z::Polar, indent::Int, precedence::Int)</code>, which is called internally by the expression object when printing:</p><pre><code class="language-julia-repl">julia&gt; function Base.show_unquoted(io::IO, z::Polar, ::Int, precedence::Int)
            if Base.operator_precedence(:*) &lt;= precedence
                print(io, &quot;(&quot;)
                show(io, z)

@@ -20,7 +20,7 @@ allowing Julia to take full advantage of computational resources. Additionally, 
 software support for [Arbitrary Precision Arithmetic](@ref), which can handle operations on numeric
 values that cannot be represented effectively in native hardware representations, but at the cost
 of relatively slower performance.
---><p>Juliaにはさまざまな種類・範囲の数値プリミティブ型がありますが、 それぞれの型に対して算術演算やビット演算がすべて通常の数学関数と同様に定義されています。 こうした型や演算子は今時のコンピュータならネイティブに利用できる型や演算子と直接対応しているので、 Juliaでは計算資源を最大限に活用することができます。 さらに、Juliaではソフトウェアによる<a href="integers-and-floating-point-numbers.html#任意精度演算-1">任意精度演算</a>が利用可能なので、 ネイティブなハードウェア表現の事実上不可能な値も扱えますが、 パフォーマンスは比較的遅くなってしまいます。</p><!--
+--><p>Juliaにはさまざまな種類・範囲の数値プリミティブ型がありますが、 それぞれの型に対して算術演算やビット演算がすべて通常の数学関数と同様に定義されています。 こうした型や演算子は今時のコンピュータならネイティブに利用できる型や演算子と直接対応しているので、 Juliaでは計算資源を最大限に活用することができます。 さらに、Juliaではソフトウェアによる<a href="integers-and-floating-point-numbers.html#任意精度演算-1">任意精度演算</a>が利用可能なので、 ネイティブなハードウェア表現では事実上不可能な値も扱えますが、 パフォーマンスは比較的遅くなってしまいます。</p><!--
 The following are Julia's primitive numeric types:
 --><p>以下にJuliaのプリミティブ数値型を挙げていきます。</p><p>`<a href="  * **Integer types:**"></a></p><ul><li><strong>整数型:</strong></li></ul><!--
 | Type              | Signed? | Number of bits | Smallest value | Largest value |
@@ -66,7 +66,7 @@ julia&gt; typeof(1)
 Int64</code></pre><!--
 The Julia internal variable [`Sys.WORD_SIZE`](@ref) indicates whether the target system is 32-bit
 or 64-bit:
---><p>Juliaの内部変数<a href="../base/constants.html#Base.Sys.WORD_SIZE"><code>Sys.WORD_SIZE</code></a>からターゲットシステムが32bitと64bitのどちらなのかが分かります。</p><pre><code class="language-julia-repl"># 32-bit system:
+--><p>Juliaの内部変数<a href="../base/constants.html#Base.Sys.WORD_SIZE"><code>Sys.WORD_SIZE</code></a>からターゲットシステムが32bitか64bitかが分かります。</p><pre><code class="language-julia-repl"># 32-bit system:
 julia&gt; Sys.WORD_SIZE
 32
 
@@ -88,7 +88,7 @@ julia&gt; UInt
 UInt64</code></pre><!--
 Larger integer literals that cannot be represented using only 32 bits but can be represented in
 64 bits always create 64-bit integers, regardless of the system type:
---><p>大きな整数リテラルで、32bitでは表現できないけれども、64bitなら可能なものは、システムの整数型にかかわらず、常に64bitの整数が 生成されます。</p><pre><code class="language-julia-repl"># 32-bit or 64-bit system:
+--><p>大きな整数リテラルで、32bitでは表現できなくても64bitなら可能なものは、システムの整数型にかかわらず、常に64bitの整数が 生成されます。</p><pre><code class="language-julia-repl"># 32-bit or 64-bit system:
 julia&gt; typeof(3000000000)
 Int64</code></pre><!--
 Unsigned integers are input and output using the `0x` prefix and hexadecimal (base 16) digits
@@ -290,7 +290,7 @@ the real number line:
 For further discussion of how these non-finite floating-point values are ordered with respect
 to each other and other floats, see [Numeric Comparisons](@ref). By the [IEEE 754 standard](https://en.wikipedia.org/wiki/IEEE_754-2008),
 these floating-point values are the results of certain arithmetic operations:
---><p>こうした非有限の浮動小数点数を、非有限・有限のものに対してどう順序づけるかという更なる議論は、<a href="manual/@ref">数値の比較</a>を参照してください。  <a href="https://en.wikipedia.org/wiki/IEEE_754-2008">IEEE 754 規格</a>では、  これらの浮動小数点数の値はある種の算術演算の結果として得られます。</p><pre><code class="language-julia-repl">julia&gt; 1/Inf
+--><p>こうした非有限の浮動小数点数を、非有限・有限のものに対してどう順序づけるかという更なる議論は、<a href="mathematical-operations.html#数値の比較-1">数値の比較</a>を参照してください。  <a href="https://en.wikipedia.org/wiki/IEEE_754-2008">IEEE 754 規格</a>では、  これらの浮動小数点数の値はある種の算術演算の結果として得られます。</p><pre><code class="language-julia-repl">julia&gt; 1/Inf
 0.0
 
 julia&gt; 1/0
@@ -568,7 +568,7 @@ type of a given variable.
 --><table><tr><th>関数</th><th>説明</th></tr><tr><td><a href="../base/numbers.html#Base.zero"><code>zero(x)</code></a></td><td>型<code>x</code>の0リテラルか、変数<code>x</code>と同じ0リテラル</td></tr><tr><td><a href="../base/numbers.html#Base.one"><code>one(x)</code></a></td><td>型<code>x</code>の1リテラルか、変数<code>x</code>と同じ1リテラル</td></tr></table><!--
 These functions are useful in [Numeric Comparisons](@ref) to avoid overhead from unnecessary
 [type conversion](@ref conversion-and-promotion).
---><p>これらの関数は <a href="manual/@ref">数値の比較</a>を行うときに、 <a href="conversion-and-promotion.html#conversion-and-promotion-1">型変換</a>の不要なオーバーヘッドを 避けるために役立ちます。</p><p>Examples:</p><pre><code class="language-julia-repl">julia&gt; zero(Float32)
+--><p>これらの関数は <a href="mathematical-operations.html#数値の比較-1">数値の比較</a>を行うときに、 <a href="conversion-and-promotion.html#conversion-and-promotion-1">型変換</a>の不要なオーバーヘッドを 避けるために役立ちます。</p><p>Examples:</p><pre><code class="language-julia-repl">julia&gt; zero(Float32)
 0.0f0
 
 julia&gt; zero(1.0)
