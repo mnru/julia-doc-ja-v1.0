@@ -11,13 +11,13 @@ Julia ships with predefined types representing both complex and rational numbers
 all standard [Mathematical Operations and Elementary Functions](@ref) on them. [Conversion and Promotion](@ref conversion-and-promotion) are defined
 so that operations on any combination of predefined numeric types, whether primitive or composite,
 behave as expected.
---><p>Juliaには複素数と有理数が定義済みの型として備わっていて、すべての標準的な<a href="manual/@ref">算術演算子と初等関数</a>に対応しています。 プリミティブ型も複合型も、定義済みの型の組み合わせに対しては期待通りに動くように、<a href="conversion-and-promotion.html#conversion-and-promotion-1">変換と昇格</a> が定義されています。</p><p>`<a href="## Complex Numbers"></a></p><h2><a class="nav-anchor" id="複素数-1" href="#複素数-1">複素数</a></h2><!--
+--><p>Juliaには定義済みの型として複素数型と有理数型を備えており、すべての標準的な<a href="manual/@ref">算術演算子と初等関数</a>に対応しています。 <a href="conversion-and-promotion.html#conversion-and-promotion-1">変換と昇格</a>が定義されているために、定義済みの型の組み合わせに対しては、プリミティブ型も複合型も、期待通りに動きます。</p><p>`<a href="## Complex Numbers"></a></p><h2><a class="nav-anchor" id="複素数-1" href="#複素数-1">複素数</a></h2><!--
 The global constant [`im`](@ref) is bound to the complex number *i*, representing the principal
 square root of -1. It was deemed harmful to co-opt the name `i` for a global constant, since it
 is such a popular index variable name. Since Julia allows numeric literals to be [juxtaposed with identifiers as coefficients](@ref man-numeric-literal-coefficients),
 this binding suffices to provide convenient syntax for complex numbers, similar to the traditional
 mathematical notation:
---><p>グローバル定数の <a href="../base/numbers.html#Base.im"><code>im</code></a>には複素数の <em>i</em> が束縛されていて、-1の平方根を表しています。 <code>i</code>はよくインデックスに使われる変数のために、グローバル変数にするのは害があると思われます。 Juliaでは、数値リテラルを<a href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients-1">識別子の前に置くと係数になる</a>ので、 この定数は、従来の数学表記に似た、便利な複素数の構文として、利用できます。</p><pre><code class="language-julia-repl">julia&gt; 1 + 2im
+--><p>グローバル定数の <a href="../base/numbers.html#Base.im"><code>im</code></a>には複素数の <em>i</em> が束縛されており、-1の平方根を表しています。 インデックスによく使われる変数<code>i</code>は、グローバル変数にすると害があるでしょう。 Juliaでは、数値リテラルを<a href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients-1">識別子の前に置くと係数になる</a>ので、 複素数の構文を、この定数を使って、便利に、従来の数学表記に似せることができます。</p><pre><code class="language-julia-repl">julia&gt; 1 + 2im
 1 + 2im</code></pre><!--
 You can perform all the standard arithmetic operations with complex numbers:
 --><p>複素数の標準的な算術演算はすべて実行可能です。</p><pre><code class="language-julia-repl">julia&gt; (1 + 2im)*(2 - 3im)
@@ -105,7 +105,7 @@ As usual, the absolute value ([`abs`](@ref)) of a complex number is its distance
 numbers where it avoids taking a square root. [`angle`](@ref) returns the phase angle in radians
 (also known as the *argument* or *arg* function). The full gamut of other [Elementary Functions](@ref)
 is also defined for complex numbers:
---><p>通常通り、複素数の絶対値 (<a href="../base/math.html#Base.abs"><code>abs</code></a>)は０からの距離です。 <a href="../base/math.html#Base.abs2"><code>abs2</code></a>は、複素数の絶対値の二乗で、特に複素数に対して、平方根の計算をさけるために使われます。 <a href="../base/math.html#Base.angle"><code>angle</code></a>はラジアンによる位相角（<strong>偏角</strong>としても知られています）を返します。 その他すべての<a href="mathematical-operations.html#初等関数-1">初等関数</a>も複素数に対して定義されています。</p><pre><code class="language-julia-repl">julia&gt; sqrt(1im)
+--><p>通常通り、複素数の絶対値 (<a href="../base/math.html#Base.abs"><code>abs</code></a>)は０からの距離です。 <a href="../base/math.html#Base.abs2"><code>abs2</code></a>は、複素数の絶対値の二乗で、特に複素数の場合に、平方根の計算をさけるために使われます。 <a href="../base/math.html#Base.angle"><code>angle</code></a>はラジアンによる位相角（<strong>偏角</strong>としても知られています）を返します。 その他すべての<a href="mathematical-operations.html#初等関数-1">初等関数</a>も複素数に対して定義されています。</p><pre><code class="language-julia-repl">julia&gt; sqrt(1im)
 0.7071067811865476 + 0.7071067811865475im
 
 julia&gt; sqrt(1 + 2im)
@@ -136,13 +136,13 @@ from variables. Instead, the multiplication must be explicitly written out:
 1 + 2im</code></pre><!--
 However, this is *not* recommended; Use the [`complex`](@ref) function instead to construct
 a complex value directly from its real and imaginary parts:
---><p>しかし、これは推奨<strong>されません</strong>。 実部と虚部から直接、複素数をつくるには、<a href="../base/numbers.html#Base.complex-Tuple{Complex}"><code>complex</code></a>を使ってください。</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2; complex(a, b)
+--><p>しかし、これは推奨<strong>されません</strong>。 実部と虚部から直接、複素数をつくるには、関数<a href="../base/numbers.html#Base.complex-Tuple{Complex}"><code>complex</code></a>を使ってください。</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2; complex(a, b)
 1 + 2im</code></pre><!--
 This construction avoids the multiplication and addition operations.
 
 [`Inf`](@ref) and [`NaN`](@ref) propagate through complex numbers in the real and imaginary parts
 of a complex number as described in the [Special floating-point values](@ref) section:
---><p>この作り方によって、乗算・加算が避けられます。 <a href="integers-and-floating-point-numbers.html#特殊な浮動小数点数の値-1">特殊な浮動小数点数の値</a>のセクションで述べた、<a href="../base/numbers.html#Base.Inf"><code>Inf</code></a>や<a href="../base/numbers.html#Base.NaN"><code>NaN</code></a>は、複素数の実部や虚部に 使うことができます。</p><pre><code class="language-julia-repl">julia&gt; 1 + Inf*im
+--><p>この作り方によって、乗算・加算を除くことができます。 <a href="integers-and-floating-point-numbers.html#特殊な浮動小数点数の値-1">特殊な浮動小数点数の値</a>のセクションで述べた、<a href="../base/numbers.html#Base.Inf"><code>Inf</code></a>や<a href="../base/numbers.html#Base.NaN"><code>NaN</code></a>は、複素数の実部や虚部に 使うことができます。</p><pre><code class="language-julia-repl">julia&gt; 1 + Inf*im
 1.0 + Inf*im
 
 julia&gt; 1 + NaN*im
@@ -204,7 +204,7 @@ Rationals can be easily converted to floating-point numbers:
 0.75</code></pre><!--
 Conversion from rational to floating-point respects the following identity for any integral values
 of `a` and `b`, with the exception of the case `a == 0` and `b == 0`:
---><p>有理数から浮動小数点数への変換は、<code>a == 0</code>かつ<code>b == 0</code>の場合を除く任意の整数値<code>a</code>と<code>b</code>に対して、 下記の式のようなの等価性が成り立つことを尊重しています。</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2;
+--><p>有理数から浮動小数点数への変換は、<code>a == 0</code>かつ<code>b == 0</code>の場合を除く任意の整数値<code>a</code>と<code>b</code>に対して、 下記の式に記した等価性が成り立つことを尊重しています。</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2;
 
 julia&gt; isequal(float(a//b), a/b)
 true</code></pre><!--

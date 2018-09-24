@@ -505,14 +505,14 @@ combined with exponentiation.
 For example `2^3x` is parsed as `2^(3x)`, and `2x^3` is parsed as `2*(x^3)`.
 
 Numeric literals also work as coefficients to parenthesized expressions:
---><p>数値リテラル係数の優先順位はマイナスなどの単項演算子低いです。 そのため <code>-2x</code>は<code>(-2) * x</code>に解析され、 <code>√2x</code> は <code>(√2) * x</code>と解析されます。 しかし巾関数と結合するときは、単項演算子と同様に解析されます。 例えば、 <code>2^3x</code> は <code>2^(3x)</code>、 <code>2x^3</code> は <code>2*(x^3)</code>というように解析されます。</p><pre><code class="language-julia-repl">julia&gt; 2(x-1)^2 - 3(x-1) + 1
+--><p>数値リテラル係数の優先順位は、マイナスなどの単項演算子よりも低いです。 そのため <code>-2x</code>は<code>(-2) * x</code>に解析され、 <code>√2x</code> は <code>(√2) * x</code>と解析されます。 しかし巾関数と結合するときは、単項演算子と同様に解析されます。 例えば、 <code>2^3x</code> は <code>2^(3x)</code>、 <code>2x^3</code> は <code>2*(x^3)</code>というように解析されます。</p><pre><code class="language-julia-repl">julia&gt; 2(x-1)^2 - 3(x-1) + 1
 3</code></pre><!--
 !!! note
     The precedence of numeric literal coefficients used for implicit
     multiplication is higher than other binary operators such as multiplication
     (`*`), and division (`/`, `\`, and `//`).  This means, for example, that
     `1 / 2im` equals `-0.5im` and `6 // 2(2 + 1)` equals `1 // 1`.
---><p>!!! 注意     掛け算を暗に示す数値リテラル係数は他の2項演算子、例えば、乗法(<code>*</code>)や除法 (<code>/</code>, <code>\</code>, <code>//</code>)よりも     優先順位は高いです。     例えば、<code>1 / 2im</code>は<code>-0.5im</code>と等しく、<code>6 // 2(2 + 1)</code>は<code>1 // 1</code>と等しいです。</p><!--
+--><p>!!! 注意     暗黙的な掛け算に使われる数値リテラル係数は、他の2項演算子、例えば、乗法(<code>*</code>)や除法 (<code>/</code>, <code>\</code>, <code>//</code>)よりも     優先順位は高いです。     例えば、<code>1 / 2im</code>は<code>-0.5im</code>と等しく、<code>6 // 2(2 + 1)</code>は<code>1 // 1</code>と等しいです。</p><!--
 Additionally, parenthesized expressions can be used as coefficients to variables, implying multiplication
 of the expression by the variable:
 --><p>さらに、括弧でくくった式を変数に対する係数として扱い、式と変数の掛け算を行うことができます。</p><pre><code class="language-julia-repl">julia&gt; (x-1)x
