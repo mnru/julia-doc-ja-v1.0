@@ -138,7 +138,7 @@ A few special expressions correspond to calls to functions with non-obvious name
 | `A[i] = x`        | [`setindex!`](@ref)     |
 | `A.n`             | [`getproperty`](@ref Base.getproperty) |
 | `A.n = x`         | [`setproperty!`](@ref Base.setproperty!) |
---><p>非自明な名前による関数呼び出しに対応した特殊な式がいくつかあります。それらは</p><table><tr><th>式</th><th>呼び出し名</th></tr><tr><td><code>[A B C ...]</code></td><td><a href="../base/arrays.html#Base.hcat"><code>hcat</code></a></td></tr><tr><td><code>[A; B; C; ...]</code></td><td><a href="../base/arrays.html#Base.vcat"><code>vcat</code></a></td></tr><tr><td><code>[A B; C D; ...]</code></td><td><a href="../base/arrays.html#Base.hvcat"><code>hvcat</code></a></td></tr><tr><td><code>A&#39;</code></td><td><a href="../stdlib/LinearAlgebra.html#Base.adjoint"><code>adjoint</code></a></td></tr><tr><td><code>A[i]</code></td><td><a href="../base/collections.html#Base.getindex"><code>getindex</code></a></td></tr><tr><td><code>A[i] = x</code></td><td><a href="../base/collections.html#Base.setindex!"><code>setindex!</code></a></td></tr><tr><td><code>A.n</code></td><td><a href="../base/base.html#Base.getproperty"><code>getproperty</code></a></td></tr><tr><td><code>A.n = x</code></td><td><a href="../base/base.html#Base.setproperty!"><code>setproperty!</code></a></td></tr></table><p>`<a href="## [Anonymous Functions](@id man-anonymous-functions)"></a></p><h2><a class="nav-anchor" id="man-anonymous-functions-1" href="#man-anonymous-functions-1">無名関数</a></h2><!--
+--><p>見た目からはわからない名前で関数呼び出しできる特殊な式がいくつかあります。それらは</p><table><tr><th>式</th><th>呼び出し名</th></tr><tr><td><code>[A B C ...]</code></td><td><a href="../base/arrays.html#Base.hcat"><code>hcat</code></a></td></tr><tr><td><code>[A; B; C; ...]</code></td><td><a href="../base/arrays.html#Base.vcat"><code>vcat</code></a></td></tr><tr><td><code>[A B; C D; ...]</code></td><td><a href="../base/arrays.html#Base.hvcat"><code>hvcat</code></a></td></tr><tr><td><code>A&#39;</code></td><td><a href="../stdlib/LinearAlgebra.html#Base.adjoint"><code>adjoint</code></a></td></tr><tr><td><code>A[i]</code></td><td><a href="../base/collections.html#Base.getindex"><code>getindex</code></a></td></tr><tr><td><code>A[i] = x</code></td><td><a href="../base/collections.html#Base.setindex!"><code>setindex!</code></a></td></tr><tr><td><code>A.n</code></td><td><a href="../base/base.html#Base.getproperty"><code>getproperty</code></a></td></tr><tr><td><code>A.n = x</code></td><td><a href="../base/base.html#Base.setproperty!"><code>setproperty!</code></a></td></tr></table><p>`<a href="## [Anonymous Functions](@id man-anonymous-functions)"></a></p><h2><a class="nav-anchor" id="man-anonymous-functions-1" href="#man-anonymous-functions-1">無名関数</a></h2><!--
 Functions in Julia are [first-class objects](https://en.wikipedia.org/wiki/First-class_citizen):
 they can be assigned to variables, and called using the standard function call syntax from the
 variable they have been assigned to. They can be used as arguments, and they can be returned as
@@ -275,14 +275,14 @@ later in [Parametrically-constrained Varargs methods](@ref).
 On the flip side, it is often handy to "splat" the values contained in an iterable collection
 into a function call as individual arguments. To do this, one also uses `...` but in the function
 call instead:
---><pre><code class="language-julia-repl">julia&gt; x = (3, 4)
+--><p>すべての場合で、<code>x</code>は<code>bar</code>に渡された後続の値からなるタプルに束縛されます。</p><p>可変引数として渡される値の個数を制限することも可能ます。 これは後述の<a href="manual/@ref">パラメータ制限つきの可変引数メソッド</a>で議論します。</p><p>また、イテラブルコレクションに含まれる値と、関数呼び出しの各引数とは、簡単に&quot;接合&quot;できるので、よく使われます。</p><pre><code class="language-julia-repl">julia&gt; x = (3, 4)
 (3, 4)
 
 julia&gt; bar(1,2,x...)
 (1, 2, (3, 4))</code></pre><!--
 In this case a tuple of values is spliced into a varargs call precisely where the variable number
 of arguments go. This need not be the case, however:
---><pre><code class="language-julia-repl">julia&gt; x = (2, 3, 4)
+--><p>この接合は、引数の個数とタプルの要素数がちょう等しいので、する必要はありません。</p><pre><code class="language-julia-repl">julia&gt; x = (2, 3, 4)
 (2, 3, 4)
 
 julia&gt; bar(1,x...)
@@ -294,7 +294,7 @@ julia&gt; x = (1, 2, 3, 4)
 julia&gt; bar(x...)
 (1, 2, (3, 4))</code></pre><!--
 Furthermore, the iterable object splatted into a function call need not be a tuple:
---><pre><code class="language-julia-repl">julia&gt; x = [3,4]
+--><p>さらに、関数呼び出しと接合するイテラブルオブジェクトはタプルである必要はありません。</p><pre><code class="language-julia-repl">julia&gt; x = [3,4]
 2-element Array{Int64,1}:
  3
  4
@@ -313,7 +313,7 @@ julia&gt; bar(x...)
 (1, 2, (3, 4))</code></pre><!--
 Also, the function that arguments are splatted into need not be a varargs function (although it
 often is):
---><pre><code class="language-julia-repl">julia&gt; baz(a,b) = a + b;
+--><p>引数を接合する関数は可変引数関数でなくてもかまいません（可変引数関数である方が多いですが）。</p><pre><code class="language-julia-repl">julia&gt; baz(a,b) = a + b;
 
 julia&gt; args = [1,2]
 2-element Array{Int64,1}:
@@ -335,7 +335,13 @@ Closest candidates are:
   baz(::Any, ::Any) at none:1</code></pre><!--
 As you can see, if the wrong number of elements are in the splatted container, then the function
 call will fail, just as it would if too many arguments were given explicitly.
---><p>`<a href="## Optional Arguments"></a></p><h2><a class="nav-anchor" id="省略可能な引数-1" href="#省略可能な引数-1">省略可能な引数</a></h2><p>In many cases, function arguments have sensible default values and therefore might not need to be passed explicitly in every call. For example, the function <a href="../stdlib/Dates.html#Dates.Date"><code>Date(y, [m, d])</code></a> from <code>Dates</code> module constructs a <code>Date</code> type for a given year <code>y</code>, month <code>m</code> and day <code>d</code>. However, <code>m</code> and <code>d</code> arguments are optional and their default value is <code>1</code>. This behavior can be expressed concisely as:</p><pre><code class="language-julia">function Date(y::Int64, m::Int64=1, d::Int64=1)
+--><p>接合するコンテナの要素の数が適切ではない場合は、関数呼び出しは失敗します。 明示的に与える引数が多すぎる場合と同じです。</p><p>`<a href="## Optional Arguments"></a></p><h2><a class="nav-anchor" id="省略可能な引数-1" href="#省略可能な引数-1">省略可能な引数</a></h2><!--
+In many cases, function arguments have sensible default values and therefore might not need to
+be passed explicitly in every call. For example, the function [`Date(y, [m, d])`](@ref)
+from `Dates` module constructs a `Date` type for a given year `y`, month `m` and day `d`.
+However, `m` and `d` arguments are optional and their default value is `1`.
+This behavior can be expressed concisely as:
+--><pre><code class="language-julia">function Date(y::Int64, m::Int64=1, d::Int64=1)
     err = validargs(Date, y, m, d)
     err === nothing || throw(err)
     return Date(UTD(totaldays(y, m, d)))
