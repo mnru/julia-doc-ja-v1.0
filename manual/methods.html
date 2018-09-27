@@ -285,7 +285,7 @@ end</code></pre><h3><a class="nav-anchor" id="Separate-convert-and-kernel-logic-
 complexfunction(arg::Any) = complexfunction(convert(Int, arg))
 
 matmul(a::T, b::T) = ...
-matmul(a, b) = matmul(promote(a, b)...)</code></pre><h2><a class="nav-anchor" id="Parametrically-constrained-Varargs-methods-1" href="#Parametrically-constrained-Varargs-methods-1">Parametrically-constrained Varargs methods</a></h2><p>Function parameters can also be used to constrain the number of arguments that may be supplied to a &quot;varargs&quot; function (<a href="functions.html#Varargs-Functions-1">Varargs Functions</a>).  The notation <code>Vararg{T,N}</code> is used to indicate such a constraint.  For example:</p><pre><code class="language-julia-repl">julia&gt; bar(a,b,x::Vararg{Any,2}) = (a,b,x)
+matmul(a, b) = matmul(promote(a, b)...)</code></pre><h2><a class="nav-anchor" id="Parametrically-constrained-Varargs-methods-1" href="#Parametrically-constrained-Varargs-methods-1">Parametrically-constrained Varargs methods</a></h2><p>Function parameters can also be used to constrain the number of arguments that may be supplied to a &quot;varargs&quot; function (<a href="manual/@ref">Varargs Functions</a>).  The notation <code>Vararg{T,N}</code> is used to indicate such a constraint.  For example:</p><pre><code class="language-julia-repl">julia&gt; bar(a,b,x::Vararg{Any,2}) = (a,b,x)
 bar (generic function with 1 method)
 
 julia&gt; bar(1,2,3)
