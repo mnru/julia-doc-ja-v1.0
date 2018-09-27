@@ -206,26 +206,57 @@ julia&gt; x.a
 1</code></pre><!--
 Named tuples are very similar to tuples, except that fields can additionally be accessed by name
 using dot syntax (`x.a`).
---><p>名前付きタプルはタプルと非常に似ていますが、そのフィールドに対しては更に、ドット構文(<code>x.a</code>)を使って名前でアクセスできます。</p><p>`<a href="## Multiple Return Values"></a></p><h2><a class="nav-anchor" id="複数の戻り値-1" href="#複数の戻り値-1">複数の戻り値</a></h2><p>In Julia, one returns a tuple of values to simulate returning multiple values. However, tuples can be created and destructured without needing parentheses, thereby providing an illusion that multiple values are being returned, rather than a single tuple value. For example, the following function returns a pair of values:</p><pre><code class="language-julia-repl">julia&gt; function foo(a,b)
+--><p>名前付きタプルはタプルと非常に似ていますが、そのフィールドに対しては更に、ドット構文(<code>x.a</code>)を使って名前でアクセスできます。</p><p>`<a href="## Multiple Return Values"></a></p><h2><a class="nav-anchor" id="複数の戻り値-1" href="#複数の戻り値-1">複数の戻り値</a></h2><!--
+In Julia, one returns a tuple of values to simulate returning multiple values. However, tuples
+can be created and destructured without needing parentheses, thereby providing an illusion that
+multiple values are being returned, rather than a single tuple value. For example, the following
+function returns a pair of values:
+--><p>Juliaでは値をタプルを使って、擬似的に複数の値を返すことができますが、 タプルは括弧をつかわなくても、生成・分割ができるので、単一のタプルの値ではなく複数の値を返しているような錯覚を与えるでしょう。 下記の関数では値の組を返しています。</p><pre><code class="language-julia-repl">julia&gt; function foo(a,b)
            a+b, a*b
        end
-foo (generic function with 1 method)</code></pre><p>If you call it in an interactive session without assigning the return value anywhere, you will see the tuple returned:</p><pre><code class="language-julia-repl">julia&gt; foo(2,3)
-(5, 6)</code></pre><p>A typical usage of such a pair of return values, however, extracts each value into a variable. Julia supports simple tuple &quot;destructuring&quot; that facilitates this:</p><pre><code class="language-julia-repl">julia&gt; x, y = foo(2,3)
+foo (generic function with 1 method)</code></pre><!--
+If you call it in an interactive session without assigning the return value anywhere, you will
+see the tuple returned:
+--><p>この関数を対話セッションで戻り値をどこにも代入しない場合は、タプルが返ってくるのを確認できます。</p><pre><code class="language-julia-repl">julia&gt; foo(2,3)
+(5, 6)</code></pre><!--
+A typical usage of such a pair of return values, however, extracts each value into a variable.
+Julia supports simple tuple "destructuring" that facilitates this:
+--><p>しかし、こういった戻り値を組みにして返す用法をよく使うのは、それぞれの値を取り出して変数に代入する場合でしょう。 Juliaでは、これを簡単にするタプルの&quot;分割&quot;に対応しています。</p><pre><code class="language-julia-repl">julia&gt; x, y = foo(2,3)
 (5, 6)
 
 julia&gt; x
 5
 
 julia&gt; y
-6</code></pre><p>You can also return multiple values via an explicit usage of the <code>return</code> keyword:</p><pre><code class="language-julia">function foo(a,b)
+6</code></pre><!--
+You can also return multiple values via an explicit usage of the `return` keyword:
+--><p>Juliaでは<code>return</code>キーワードを明示した用法で、複数の値を返すこともできます。</p><pre><code class="language-julia">function foo(a,b)
     return a+b, a*b
-end</code></pre><p>This has the exact same effect as the previous definition of <code>foo</code>.</p><p>`<a href="## Argument destructuring"></a></p><h2><a class="nav-anchor" id="引数分割-1" href="#引数分割-1">引数分割</a></h2><p>The destructuring feature can also be used within a function argument. If a function argument name is written as a tuple (e.g. <code>(x, y)</code>) instead of just a symbol, then an assignment <code>(x, y) = argument</code> will be inserted for you:</p><pre><code class="language-julia">julia&gt; minmax(x, y) = (y &lt; x) ? (y, x) : (x, y)
+end</code></pre><!--
+This has the exact same effect as the previous definition of `foo`.
+--><p>これは前に出てきた<code>foo</code>の定義と全く同じ効果があります。</p><p>`<a href="## Argument destructuring"></a></p><h2><a class="nav-anchor" id="引数分割-1" href="#引数分割-1">引数分割</a></h2><!--
+The destructuring feature can also be used within a function argument.
+If a function argument name is written as a tuple (e.g. `(x, y)`) instead of just
+a symbol, then an assignment `(x, y) = argument` will be inserted for you:
+--><p>分割の機能は、関数の引数の中でも利用できます。 関数の引数の位置にそれぞれの記号(例えば <code>(x, y)</code>)ではなくタプルを書くと、 <code>(x, y) = 引数のタプル</code>という代入が実行されます。</p><pre><code class="language-julia">julia&gt; minmax(x, y) = (y &lt; x) ? (y, x) : (x, y)
 
 julia&gt; range((min, max)) = max - min
 
 julia&gt; range(minmax(10, 2))
-8</code></pre><p>Notice the extra set of parentheses in the definition of <code>range</code>. Without those, <code>range</code> would be a two-argument function, and this example would not work.</p><p>`<a href="## Varargs Functions"></a></p><h2><a class="nav-anchor" id="可変引数関数-1" href="#可変引数関数-1">可変引数関数</a></h2><p>It is often convenient to be able to write functions taking an arbitrary number of arguments. Such functions are traditionally known as &quot;varargs&quot; functions, which is short for &quot;variable number of arguments&quot;. You can define a varargs function by following the last argument with an ellipsis:</p><pre><code class="language-julia-repl">julia&gt; bar(a,b,x...) = (a,b,x)
-bar (generic function with 1 method)</code></pre><p>The variables <code>a</code> and <code>b</code> are bound to the first two argument values as usual, and the variable <code>x</code> is bound to an iterable collection of the zero or more values passed to <code>bar</code> after its first two arguments:</p><pre><code class="language-julia-repl">julia&gt; bar(1,2)
+8</code></pre><!--
+Notice the extra set of parentheses in the definition of `range`.
+Without those, `range` would be a two-argument function, and this example would
+not work.
+--><p><code>range</code>の定義で余計な括弧があるのに注意してください。  これがなければ、<code>range</code>は引数が２個の関数となり、この例はうまく動作しません。</p><p>`<a href="## Varargs Functions"></a></p><h2><a class="nav-anchor" id="可変引数関数-1" href="#可変引数関数-1">可変引数関数</a></h2><!--
+It is often convenient to be able to write functions taking an arbitrary number of arguments.
+Such functions are traditionally known as "varargs" functions, which is short for "variable number
+of arguments". You can define a varargs function by following the last argument with an ellipsis:
+--><p>引数の数が任意個の関数が書けると便利なことがよくあります。 そういった関数は従来、”可変引数”関数として知られ、これは”可変個の引数”の略です。 可変引数関数は、最後の引数のあとに省略記号をつけると定義できます。</p><pre><code class="language-julia-repl">julia&gt; bar(a,b,x...) = (a,b,x)
+bar (generic function with 1 method)</code></pre><!--
+The variables `a` and `b` are bound to the first two argument values as usual, and the variable
+`x` is bound to an iterable collection of the zero or more values passed to `bar` after its first
+two arguments:
+--><p>変数<code>a</code>と<code>b</code>は、通常通り、最初の２つの変数に束縛されています。 変数<code>x</code>は、最初の２つの引数に続いて<code>bar</code>に渡された引数からなる、０個以上のイテラブルコレクションが束縛される。 </p><pre><code class="language-julia-repl">julia&gt; bar(1,2)
 (1, 2, ())
 
 julia&gt; bar(1,2,3)
@@ -235,11 +266,23 @@ julia&gt; bar(1, 2, 3, 4)
 (1, 2, (3, 4))
 
 julia&gt; bar(1,2,3,4,5,6)
-(1, 2, (3, 4, 5, 6))</code></pre><p>In all these cases, <code>x</code> is bound to a tuple of the trailing values passed to <code>bar</code>.</p><p>It is possible to constrain the number of values passed as a variable argument; this will be discussed later in <a href="methods.html#Parametrically-constrained-Varargs-methods-1">Parametrically-constrained Varargs methods</a>.</p><p>On the flip side, it is often handy to &quot;splat&quot; the values contained in an iterable collection into a function call as individual arguments. To do this, one also uses <code>...</code> but in the function call instead:</p><pre><code class="language-julia-repl">julia&gt; x = (3, 4)
+(1, 2, (3, 4, 5, 6))</code></pre><!--
+In all these cases, `x` is bound to a tuple of the trailing values passed to `bar`.
+
+It is possible to constrain the number of values passed as a variable argument; this will be discussed
+later in [Parametrically-constrained Varargs methods](@ref).
+
+On the flip side, it is often handy to "splat" the values contained in an iterable collection
+into a function call as individual arguments. To do this, one also uses `...` but in the function
+call instead:
+--><pre><code class="language-julia-repl">julia&gt; x = (3, 4)
 (3, 4)
 
 julia&gt; bar(1,2,x...)
-(1, 2, (3, 4))</code></pre><p>In this case a tuple of values is spliced into a varargs call precisely where the variable number of arguments go. This need not be the case, however:</p><pre><code class="language-julia-repl">julia&gt; x = (2, 3, 4)
+(1, 2, (3, 4))</code></pre><!--
+In this case a tuple of values is spliced into a varargs call precisely where the variable number
+of arguments go. This need not be the case, however:
+--><pre><code class="language-julia-repl">julia&gt; x = (2, 3, 4)
 (2, 3, 4)
 
 julia&gt; bar(1,x...)
@@ -249,7 +292,9 @@ julia&gt; x = (1, 2, 3, 4)
 (1, 2, 3, 4)
 
 julia&gt; bar(x...)
-(1, 2, (3, 4))</code></pre><p>Furthermore, the iterable object splatted into a function call need not be a tuple:</p><pre><code class="language-julia-repl">julia&gt; x = [3,4]
+(1, 2, (3, 4))</code></pre><!--
+Furthermore, the iterable object splatted into a function call need not be a tuple:
+--><pre><code class="language-julia-repl">julia&gt; x = [3,4]
 2-element Array{Int64,1}:
  3
  4
@@ -265,7 +310,10 @@ julia&gt; x = [1,2,3,4]
  4
 
 julia&gt; bar(x...)
-(1, 2, (3, 4))</code></pre><p>Also, the function that arguments are splatted into need not be a varargs function (although it often is):</p><pre><code class="language-julia-repl">julia&gt; baz(a,b) = a + b;
+(1, 2, (3, 4))</code></pre><!--
+Also, the function that arguments are splatted into need not be a varargs function (although it
+often is):
+--><pre><code class="language-julia-repl">julia&gt; baz(a,b) = a + b;
 
 julia&gt; args = [1,2]
 2-element Array{Int64,1}:
@@ -284,7 +332,10 @@ julia&gt; args = [1,2,3]
 julia&gt; baz(args...)
 ERROR: MethodError: no method matching baz(::Int64, ::Int64, ::Int64)
 Closest candidates are:
-  baz(::Any, ::Any) at none:1</code></pre><p>As you can see, if the wrong number of elements are in the splatted container, then the function call will fail, just as it would if too many arguments were given explicitly.</p><p>`<a href="## Optional Arguments"></a></p><h2><a class="nav-anchor" id="省略可能な引数-1" href="#省略可能な引数-1">省略可能な引数</a></h2><p>In many cases, function arguments have sensible default values and therefore might not need to be passed explicitly in every call. For example, the function <a href="../stdlib/Dates.html#Dates.Date"><code>Date(y, [m, d])</code></a> from <code>Dates</code> module constructs a <code>Date</code> type for a given year <code>y</code>, month <code>m</code> and day <code>d</code>. However, <code>m</code> and <code>d</code> arguments are optional and their default value is <code>1</code>. This behavior can be expressed concisely as:</p><pre><code class="language-julia">function Date(y::Int64, m::Int64=1, d::Int64=1)
+  baz(::Any, ::Any) at none:1</code></pre><!--
+As you can see, if the wrong number of elements are in the splatted container, then the function
+call will fail, just as it would if too many arguments were given explicitly.
+--><p>`<a href="## Optional Arguments"></a></p><h2><a class="nav-anchor" id="省略可能な引数-1" href="#省略可能な引数-1">省略可能な引数</a></h2><p>In many cases, function arguments have sensible default values and therefore might not need to be passed explicitly in every call. For example, the function <a href="../stdlib/Dates.html#Dates.Date"><code>Date(y, [m, d])</code></a> from <code>Dates</code> module constructs a <code>Date</code> type for a given year <code>y</code>, month <code>m</code> and day <code>d</code>. However, <code>m</code> and <code>d</code> arguments are optional and their default value is <code>1</code>. This behavior can be expressed concisely as:</p><pre><code class="language-julia">function Date(y::Int64, m::Int64=1, d::Int64=1)
     err = validargs(Date, y, m, d)
     err === nothing || throw(err)
     return Date(UTD(totaldays(y, m, d)))
