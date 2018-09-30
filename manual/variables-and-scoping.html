@@ -1,34 +1,90 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Scope of Variables · The Julia Language</title><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>変数のスコープ · The Julia Language</title><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-125166476-1', 'auto');
 ga('send', 'pageview');
-</script><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/><link href="../assets/julia-manual.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><a href="../index.html"><img class="logo" src="../assets/logo.png" alt="The Julia Language logo"/></a><h1>The Julia Language</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../index.html">Home</a></li><li><span class="toctext">Manual</span><ul><li><a class="toctext" href="getting-started.html">始めよう</a></li><li><a class="toctext" href="variables.html">変数</a></li><li><a class="toctext" href="integers-and-floating-point-numbers.html">整数と浮動小数点数</a></li><li><a class="toctext" href="mathematical-operations.html">算術演算と初等関数</a></li><li><a class="toctext" href="complex-and-rational-numbers.html">複素数と有理数</a></li><li><a class="toctext" href="strings.html">文字列</a></li><li><a class="toctext" href="functions.html">関数</a></li><li><a class="toctext" href="control-flow.html">制御フロー</a></li><li class="current"><a class="toctext" href="variables-and-scoping.html">Scope of Variables</a><ul class="internal"><li class="toplevel"><a class="toctext" href="#man-scope-table-1"></a></li><li><a class="toctext" href="#Global-Scope-1">Global Scope</a></li><li><a class="toctext" href="#Local-Scope-1">Local Scope</a></li><li><a class="toctext" href="#Constants-1">Constants</a></li></ul></li><li><a class="toctext" href="types.html">Types</a></li><li><a class="toctext" href="methods.html">Methods</a></li><li><a class="toctext" href="constructors.html">Constructors</a></li><li><a class="toctext" href="conversion-and-promotion.html">Conversion and Promotion</a></li><li><a class="toctext" href="interfaces.html">Interfaces</a></li><li><a class="toctext" href="modules.html">Modules</a></li><li><a class="toctext" href="documentation.html">Documentation</a></li><li><a class="toctext" href="metaprogramming.html">Metaprogramming</a></li><li><a class="toctext" href="arrays.html">Multi-dimensional Arrays</a></li><li><a class="toctext" href="missing.html">Missing Values</a></li><li><a class="toctext" href="networking-and-streams.html">Networking and Streams</a></li><li><a class="toctext" href="parallel-computing.html">Parallel Computing</a></li><li><a class="toctext" href="running-external-programs.html">Running External Programs</a></li><li><a class="toctext" href="calling-c-and-fortran-code.html">Calling C and Fortran Code</a></li><li><a class="toctext" href="handling-operating-system-variation.html">Handling Operating System Variation</a></li><li><a class="toctext" href="environment-variables.html">Environment Variables</a></li><li><a class="toctext" href="embedding.html">Embedding Julia</a></li><li><a class="toctext" href="code-loading.html">Code Loading</a></li><li><a class="toctext" href="profile.html">Profiling</a></li><li><a class="toctext" href="stacktraces.html">Stack Traces</a></li><li><a class="toctext" href="performance-tips.html">Performance Tips</a></li><li><a class="toctext" href="workflow-tips.html">Workflow Tips</a></li><li><a class="toctext" href="style-guide.html">Style Guide</a></li><li><a class="toctext" href="faq.html">Frequently Asked Questions</a></li><li><a class="toctext" href="noteworthy-differences.html">Noteworthy Differences from other Languages</a></li><li><a class="toctext" href="unicode-input.html">Unicode Input</a></li></ul></li><li><span class="toctext">Base</span><ul><li><a class="toctext" href="../base/base.html">Essentials</a></li><li><a class="toctext" href="../base/collections.html">Collections and Data Structures</a></li><li><a class="toctext" href="../base/math.html">Mathematics</a></li><li><a class="toctext" href="../base/numbers.html">Numbers</a></li><li><a class="toctext" href="../base/strings.html">Strings</a></li><li><a class="toctext" href="../base/arrays.html">Arrays</a></li><li><a class="toctext" href="../base/parallel.html">Tasks</a></li><li><a class="toctext" href="../base/multi-threading.html">Multi-Threading</a></li><li><a class="toctext" href="../base/constants.html">Constants</a></li><li><a class="toctext" href="../base/file.html">Filesystem</a></li><li><a class="toctext" href="../base/io-network.html">I/O and Network</a></li><li><a class="toctext" href="../base/punctuation.html">Punctuation</a></li><li><a class="toctext" href="../base/sort.html">Sorting and Related Functions</a></li><li><a class="toctext" href="../base/iterators.html">Iteration utilities</a></li><li><a class="toctext" href="../base/c.html">C Interface</a></li><li><a class="toctext" href="../base/libc.html">C Standard Library</a></li><li><a class="toctext" href="../base/stacktraces.html">StackTraces</a></li><li><a class="toctext" href="../base/simd-types.html">SIMD Support</a></li></ul></li><li><span class="toctext">Standard Library</span><ul><li><a class="toctext" href="../stdlib/Base64.html">Base64</a></li><li><a class="toctext" href="../stdlib/CRC32c.html">CRC32c</a></li><li><a class="toctext" href="../stdlib/Dates.html">Dates</a></li><li><a class="toctext" href="../stdlib/DelimitedFiles.html">Delimited Files</a></li><li><a class="toctext" href="../stdlib/Distributed.html">Distributed Computing</a></li><li><a class="toctext" href="../stdlib/FileWatching.html">File Events</a></li><li><a class="toctext" href="../stdlib/InteractiveUtils.html">Interactive Utilities</a></li><li><a class="toctext" href="../stdlib/Libdl.html">Dynamic Linker</a></li><li><a class="toctext" href="../stdlib/LibGit2.html">LibGit2</a></li><li><a class="toctext" href="../stdlib/LinearAlgebra.html">Linear Algebra</a></li><li><a class="toctext" href="../stdlib/Logging.html">Logging</a></li><li><a class="toctext" href="../stdlib/Markdown.html">Markdown</a></li><li><a class="toctext" href="../stdlib/Mmap.html">Memory-mapped I/O</a></li><li><a class="toctext" href="../stdlib/Pkg.html">Pkg</a></li><li><a class="toctext" href="../stdlib/Printf.html">Printf</a></li><li><a class="toctext" href="../stdlib/Profile.html">Profiling</a></li><li><a class="toctext" href="../stdlib/Random.html">Random Numbers</a></li><li><a class="toctext" href="../stdlib/REPL.html">The Julia REPL</a></li><li><a class="toctext" href="../stdlib/Serialization.html">Serialization</a></li><li><a class="toctext" href="../stdlib/SHA.html">SHA</a></li><li><a class="toctext" href="../stdlib/SharedArrays.html">Shared Arrays</a></li><li><a class="toctext" href="../stdlib/Sockets.html">Sockets</a></li><li><a class="toctext" href="../stdlib/SparseArrays.html">Sparse Arrays</a></li><li><a class="toctext" href="../stdlib/Statistics.html">Statistics</a></li><li><a class="toctext" href="../stdlib/Test.html">Unit Testing</a></li><li><a class="toctext" href="../stdlib/Unicode.html">Unicode</a></li><li><a class="toctext" href="../stdlib/UUIDs.html">UUIDs</a></li></ul></li><li><span class="toctext">Developer Documentation</span><ul><li><a class="toctext" href="../devdocs/reflection.html">Reflection and introspection</a></li><li><span class="toctext">Documentation of Julia&#39;s Internals</span><ul><li><a class="toctext" href="../devdocs/init.html">Initialization of the Julia runtime</a></li><li><a class="toctext" href="../devdocs/ast.html">Julia ASTs</a></li><li><a class="toctext" href="../devdocs/types.html">More about types</a></li><li><a class="toctext" href="../devdocs/object.html">Memory layout of Julia Objects</a></li><li><a class="toctext" href="../devdocs/eval.html">Eval of Julia code</a></li><li><a class="toctext" href="../devdocs/callconv.html">Calling Conventions</a></li><li><a class="toctext" href="../devdocs/compiler.html">High-level Overview of the Native-Code Generation Process</a></li><li><a class="toctext" href="../devdocs/functions.html">Julia Functions</a></li><li><a class="toctext" href="../devdocs/cartesian.html">Base.Cartesian</a></li><li><a class="toctext" href="../devdocs/meta.html">Talking to the compiler (the <code>:meta</code> mechanism)</a></li><li><a class="toctext" href="../devdocs/subarrays.html">SubArrays</a></li><li><a class="toctext" href="../devdocs/isbitsunionarrays.html">isbits Union Optimizations</a></li><li><a class="toctext" href="../devdocs/sysimg.html">System Image Building</a></li><li><a class="toctext" href="../devdocs/llvm.html">Working with LLVM</a></li><li><a class="toctext" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li><li><a class="toctext" href="../devdocs/boundscheck.html">Bounds checking</a></li><li><a class="toctext" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li><li><a class="toctext" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li><li><a class="toctext" href="../devdocs/require.html">Module loading</a></li><li><a class="toctext" href="../devdocs/inference.html">Inference</a></li></ul></li><li><span class="toctext">Developing/debugging Julia&#39;s C code</span><ul><li><a class="toctext" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li><li><a class="toctext" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li><li><a class="toctext" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li><li><a class="toctext" href="../devdocs/sanitizers.html">Sanitizer support</a></li></ul></li></ul></li></ul></nav><article id="docs"><header><nav><ul><li>Manual</li><li><a href="variables-and-scoping.html">Scope of Variables</a></li></ul><a class="edit-page" href="https://github.com/mnru/julia-doc-ja-v1.0-source/blob/master/src/manual/variables-and-scoping.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Scope of Variables</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="scope-of-variables-1" href="#scope-of-variables-1">Scope of Variables</a></h1><p>The <em>scope</em> of a variable is the region of code within which a variable is visible. Variable scoping helps avoid variable naming conflicts. The concept is intuitive: two functions can both have arguments called <code>x</code> without the two <code>x</code>&#39;s referring to the same thing. Similarly there are many other cases where different blocks of code can use the same name without referring to the same thing. The rules for when the same variable name does or doesn&#39;t refer to the same thing are called scope rules; this section spells them out in detail.</p><p>Certain constructs in the language introduce <em>scope blocks</em>, which are regions of code that are eligible to be the scope of some set of variables. The scope of a variable cannot be an arbitrary set of source lines; instead, it will always line up with one of these blocks. There are two main types of scopes in Julia, <em>global scope</em> and <em>local scope</em>, the latter can be nested. The constructs introducing scope blocks are:</p><h1><a class="nav-anchor" id="man-scope-table-1" href="#man-scope-table-1"></a></h1><ul><li>Scope blocks that may nest only in other global scope blocks:</li></ul><pre><code class="language-none">- global scope
+</script><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/><link href="../assets/julia-manual.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><a href="../index.html"><img class="logo" src="../assets/logo.png" alt="The Julia Language logo"/></a><h1>The Julia Language</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search.html"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../index.html">Home</a></li><li><span class="toctext">Manual</span><ul><li><a class="toctext" href="getting-started.html">始めよう</a></li><li><a class="toctext" href="variables.html">変数</a></li><li><a class="toctext" href="integers-and-floating-point-numbers.html">整数と浮動小数点数</a></li><li><a class="toctext" href="mathematical-operations.html">算術演算と初等関数</a></li><li><a class="toctext" href="complex-and-rational-numbers.html">複素数と有理数</a></li><li><a class="toctext" href="strings.html">文字列</a></li><li><a class="toctext" href="functions.html">関数</a></li><li><a class="toctext" href="control-flow.html">制御フロー</a></li><li class="current"><a class="toctext" href="variables-and-scoping.html">変数のスコープ</a><ul class="internal"><li class="toplevel"><a class="toctext" href="#man-scope-table-1"></a></li><li><a class="toctext" href="#グローバルスコープ-1">グローバルスコープ</a></li><li><a class="toctext" href="#ローカルスコープ-1">ローカルスコープ</a></li><li><a class="toctext" href="#定数-1">定数</a></li></ul></li><li><a class="toctext" href="types.html">型</a></li><li><a class="toctext" href="methods.html">Methods</a></li><li><a class="toctext" href="constructors.html">Constructors</a></li><li><a class="toctext" href="conversion-and-promotion.html">Conversion and Promotion</a></li><li><a class="toctext" href="interfaces.html">Interfaces</a></li><li><a class="toctext" href="modules.html">Modules</a></li><li><a class="toctext" href="documentation.html">Documentation</a></li><li><a class="toctext" href="metaprogramming.html">Metaprogramming</a></li><li><a class="toctext" href="arrays.html">Multi-dimensional Arrays</a></li><li><a class="toctext" href="missing.html">Missing Values</a></li><li><a class="toctext" href="networking-and-streams.html">Networking and Streams</a></li><li><a class="toctext" href="parallel-computing.html">並列コンピューティング</a></li><li><a class="toctext" href="running-external-programs.html">Running External Programs</a></li><li><a class="toctext" href="calling-c-and-fortran-code.html">Calling C and Fortran Code</a></li><li><a class="toctext" href="handling-operating-system-variation.html">Handling Operating System Variation</a></li><li><a class="toctext" href="environment-variables.html">Environment Variables</a></li><li><a class="toctext" href="embedding.html">Embedding Julia</a></li><li><a class="toctext" href="code-loading.html">Code Loading</a></li><li><a class="toctext" href="profile.html">Profiling</a></li><li><a class="toctext" href="stacktraces.html">Stack Traces</a></li><li><a class="toctext" href="performance-tips.html">Performance Tips</a></li><li><a class="toctext" href="workflow-tips.html">Workflow Tips</a></li><li><a class="toctext" href="style-guide.html">Style Guide</a></li><li><a class="toctext" href="faq.html">Frequently Asked Questions</a></li><li><a class="toctext" href="noteworthy-differences.html">Noteworthy Differences from other Languages</a></li><li><a class="toctext" href="unicode-input.html">Unicode Input</a></li></ul></li><li><span class="toctext">Base</span><ul><li><a class="toctext" href="../base/base.html">Essentials</a></li><li><a class="toctext" href="../base/collections.html">Collections and Data Structures</a></li><li><a class="toctext" href="../base/math.html">Mathematics</a></li><li><a class="toctext" href="../base/numbers.html">Numbers</a></li><li><a class="toctext" href="../base/strings.html">Strings</a></li><li><a class="toctext" href="../base/arrays.html">Arrays</a></li><li><a class="toctext" href="../base/parallel.html">Tasks</a></li><li><a class="toctext" href="../base/multi-threading.html">Multi-Threading</a></li><li><a class="toctext" href="../base/constants.html">Constants</a></li><li><a class="toctext" href="../base/file.html">Filesystem</a></li><li><a class="toctext" href="../base/io-network.html">I/O and Network</a></li><li><a class="toctext" href="../base/punctuation.html">Punctuation</a></li><li><a class="toctext" href="../base/sort.html">Sorting and Related Functions</a></li><li><a class="toctext" href="../base/iterators.html">Iteration utilities</a></li><li><a class="toctext" href="../base/c.html">C Interface</a></li><li><a class="toctext" href="../base/libc.html">C Standard Library</a></li><li><a class="toctext" href="../base/stacktraces.html">StackTraces</a></li><li><a class="toctext" href="../base/simd-types.html">SIMD Support</a></li></ul></li><li><span class="toctext">Standard Library</span><ul><li><a class="toctext" href="../stdlib/Base64.html">Base64</a></li><li><a class="toctext" href="../stdlib/CRC32c.html">CRC32c</a></li><li><a class="toctext" href="../stdlib/Dates.html">Dates</a></li><li><a class="toctext" href="../stdlib/DelimitedFiles.html">Delimited Files</a></li><li><a class="toctext" href="../stdlib/Distributed.html">Distributed Computing</a></li><li><a class="toctext" href="../stdlib/FileWatching.html">File Events</a></li><li><a class="toctext" href="../stdlib/InteractiveUtils.html">Interactive Utilities</a></li><li><a class="toctext" href="../stdlib/Libdl.html">Dynamic Linker</a></li><li><a class="toctext" href="../stdlib/LibGit2.html">LibGit2</a></li><li><a class="toctext" href="../stdlib/LinearAlgebra.html">Linear Algebra</a></li><li><a class="toctext" href="../stdlib/Logging.html">Logging</a></li><li><a class="toctext" href="../stdlib/Markdown.html">Markdown</a></li><li><a class="toctext" href="../stdlib/Mmap.html">Memory-mapped I/O</a></li><li><a class="toctext" href="../stdlib/Pkg.html">Pkg</a></li><li><a class="toctext" href="../stdlib/Printf.html">Printf</a></li><li><a class="toctext" href="../stdlib/Profile.html">Profiling</a></li><li><a class="toctext" href="../stdlib/Random.html">Random Numbers</a></li><li><a class="toctext" href="../stdlib/REPL.html">The Julia REPL</a></li><li><a class="toctext" href="../stdlib/Serialization.html">Serialization</a></li><li><a class="toctext" href="../stdlib/SHA.html">SHA</a></li><li><a class="toctext" href="../stdlib/SharedArrays.html">Shared Arrays</a></li><li><a class="toctext" href="../stdlib/Sockets.html">Sockets</a></li><li><a class="toctext" href="../stdlib/SparseArrays.html">Sparse Arrays</a></li><li><a class="toctext" href="../stdlib/Statistics.html">Statistics</a></li><li><a class="toctext" href="../stdlib/Test.html">Unit Testing</a></li><li><a class="toctext" href="../stdlib/Unicode.html">Unicode</a></li><li><a class="toctext" href="../stdlib/UUIDs.html">UUIDs</a></li></ul></li><li><span class="toctext">Developer Documentation</span><ul><li><a class="toctext" href="../devdocs/reflection.html">Reflection and introspection</a></li><li><span class="toctext">Documentation of Julia&#39;s Internals</span><ul><li><a class="toctext" href="../devdocs/init.html">Initialization of the Julia runtime</a></li><li><a class="toctext" href="../devdocs/ast.html">Julia ASTs</a></li><li><a class="toctext" href="../devdocs/types.html">More about types</a></li><li><a class="toctext" href="../devdocs/object.html">Memory layout of Julia Objects</a></li><li><a class="toctext" href="../devdocs/eval.html">Eval of Julia code</a></li><li><a class="toctext" href="../devdocs/callconv.html">Calling Conventions</a></li><li><a class="toctext" href="../devdocs/compiler.html">High-level Overview of the Native-Code Generation Process</a></li><li><a class="toctext" href="../devdocs/functions.html">Julia Functions</a></li><li><a class="toctext" href="../devdocs/cartesian.html">Base.Cartesian</a></li><li><a class="toctext" href="../devdocs/meta.html">Talking to the compiler (the <code>:meta</code> mechanism)</a></li><li><a class="toctext" href="../devdocs/subarrays.html">SubArrays</a></li><li><a class="toctext" href="../devdocs/isbitsunionarrays.html">isbits Union Optimizations</a></li><li><a class="toctext" href="../devdocs/sysimg.html">System Image Building</a></li><li><a class="toctext" href="../devdocs/llvm.html">Working with LLVM</a></li><li><a class="toctext" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li><li><a class="toctext" href="../devdocs/boundscheck.html">Bounds checking</a></li><li><a class="toctext" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li><li><a class="toctext" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li><li><a class="toctext" href="../devdocs/require.html">Module loading</a></li><li><a class="toctext" href="../devdocs/inference.html">Inference</a></li></ul></li><li><span class="toctext">Developing/debugging Julia&#39;s C code</span><ul><li><a class="toctext" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li><li><a class="toctext" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li><li><a class="toctext" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li><li><a class="toctext" href="../devdocs/sanitizers.html">Sanitizer support</a></li></ul></li></ul></li></ul></nav><article id="docs"><header><nav><ul><li>Manual</li><li><a href="variables-and-scoping.html">変数のスコープ</a></li></ul><a class="edit-page" href="https://github.com/mnru/julia-doc-ja-v1.0-source/blob/master/src/manual/variables-and-scoping.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>変数のスコープ</span><a class="fa fa-bars" href="#"></a></div></header><p>`<a href="# [Scope of Variables](@id scope-of-variables)"></a></p><h1><a class="nav-anchor" id="scope-of-variables-1" href="#scope-of-variables-1">変数のスコープ</a></h1><!--
+The *scope* of a variable is the region of code within which a variable is visible. Variable scoping
+helps avoid variable naming conflicts. The concept is intuitive: two functions can both have arguments
+called `x` without the two `x`'s referring to the same thing. Similarly there are many other cases
+where different blocks of code can use the same name without referring to the same thing. The
+rules for when the same variable name does or doesn't refer to the same thing are called scope
+rules; this section spells them out in detail.
+--><p>変数の <strong>スコープ</strong> とは、変数から参照できるコードの領域のことです。 変数のスコープを使うと変数名の競合を避けることができます。 この概念は直感的です。 ２つの関数が引数に同じ名前の<code>x</code>を使っていても、２つの<code>x</code>が同一のものを参照することなく利用できる、というものです。 同様に、コード内の別のブロックで、同じ名前を使っていても、それぞれが同一のものを参照することなく利用できる場合が数多くあります。 同じ名前の変数がいつ同じものを参照し、いつ参照しないのかという規則を、スコープ規則といいます。 このセクションで詳しく説明します。</p><!--
+Certain constructs in the language introduce *scope blocks*, which are regions of code that are
+eligible to be the scope of some set of variables. The scope of a variable cannot be an arbitrary
+set of source lines; instead, it will always line up with one of these blocks. There are two
+main types of scopes in Julia, *global scope* and *local scope*, the latter can be nested. The
+constructs introducing scope blocks are:
+--><p>言語の構文の中には <strong>スコープブロック</strong>　、つまり変数に対するスコープとして適切なコード領域が決まっているものがあります。 変数のスコープはソースの任意の行を割当てることはできません。以下のいずれかを割り当てます。 Juliaには主に２種類のスコープがあります。 <strong>グローバルスコープ</strong> と <strong>ローカルスコープ</strong> です。 後者はネストすることができます。 各構文の導入しているスコープは、</p><h1><a class="nav-anchor" id="man-scope-table-1" href="#man-scope-table-1"></a></h1><!--
+  * Scope blocks that may nest only in other global scope blocks:
 
-  + module, baremodule
+    - global scope
 
-  + at interactive prompt (REPL)
+      + module, baremodule
 
-- local scope (don&#39;t allow nesting)
+      + at interactive prompt (REPL)
 
-  + (mutable) struct, macro</code></pre><ul><li>Scope blocks which may nest anywhere (in global or local scope):</li></ul><pre><code class="language-none">- local scope
+    - local scope (don't allow nesting)
+
+      + (mutable) struct, macro
+
+  * Scope blocks which may nest anywhere (in global or local scope):
+
+    - local scope
+
+      + for, while, try-catch-finally, let
+
+      + functions (either syntax, anonymous & do-blocks)
+
+      + comprehensions, broadcast-fusing
+
+--><ul><li>他のグローバルスコープ内でのみネストが可能なスコープブロック</li></ul><pre><code class="language-none">- グローバルスコープ
+
+  + モジュール、ベアモジュール
+
+  + 対話プロンプト(REPL)
+
+- ローカルスコープ (ネスト禁止)
+
+  + (可変な) struct, マクロ</code></pre><ul><li>どこでもネストが可能なスコープブロック（グローバルでもローカルでも）</li></ul><pre><code class="language-none">- ローカルスコープ
 
   + for, while, try-catch-finally, let
 
-  + functions (either syntax, anonymous &amp; do-blocks)
+  + 関数 (構文、無名関数 、ブロック)
 
-  + comprehensions, broadcast-fusing</code></pre><p>Notably missing from this table are <a href="control-flow.html#man-compound-expressions-1">begin blocks</a> and <a href="control-flow.html#man-conditional-evaluation-1">if blocks</a> which do <em>not</em> introduce new scope blocks. Both types of scopes follow somewhat different rules which will be explained below.</p><p>Julia uses <a href="https://en.wikipedia.org/wiki/Scope_%28computer_science%29#Lexical_scoping_vs._dynamic_scoping">lexical scoping</a>, meaning that a function&#39;s scope does not inherit from its caller&#39;s scope, but from the scope in which the function was defined. For example, in the following code the <code>x</code> inside <code>foo</code> refers to the <code>x</code> in the global scope of its module <code>Bar</code>:</p><pre><code class="language-julia-repl">julia&gt; module Bar
+  + 内包表記, ブロードキャスト-融合</code></pre><!--
+Notably missing from this table are
+[begin blocks](@ref man-compound-expressions) and [if blocks](@ref man-conditional-evaluation)
+which do *not* introduce new scope blocks.
+Both types of scopes follow somewhat different rules which will be explained below.
+--><p>この表に記載のない注目すべきものは、 <a href="control-flow.html#man-compound-expressions-1">begin ブロック</a>と<a href="control-flow.html#man-conditional-evaluation-1">if ブロック</a>です。 これらは、新たなスコープブロックを <strong>導入しません</strong>。 どちらのスコープも後述のような少し違った規則に従います。</p><!--
+Julia uses [lexical scoping](https://en.wikipedia.org/wiki/Scope_%28computer_science%29#Lexical_scoping_vs._dynamic_scoping),
+meaning that a function's scope does not inherit from its caller's scope, but from the scope in
+which the function was defined. For example, in the following code the `x` inside `foo` refers
+to the `x` in the global scope of its module `Bar`:
+--><p>Juliaは<a href="https://en.wikipedia.org/wiki/Scope_%28computer_science%29#Lexical_scoping_vs._dynamic_scoping">レキシカルスコープ</a>を 使用しています。これは、呼び出し側のスコープを引き継がず、定義されたスコープを引き継ぐという意味です。 例えば、以下のコードでは、<code>foo</code>の中の<code>x</code>は、モジュール<code>Bar</code>のグローバルスコープにある<code>x</code>を参照しています。</p><pre><code class="language-julia-repl">julia&gt; module Bar
            x = 1
            foo() = x
-       end;</code></pre><p>and not a <code>x</code> in the scope where <code>foo</code> is used:</p><pre><code class="language-julia-repl">julia&gt; import .Bar
+       end;</code></pre><!--
+and not a `x` in the scope where `foo` is used:
+--><p>そして、<code>foo</code>が使われる場所のスコープにある <code>x</code>は参照しません。</p><pre><code class="language-julia-repl">julia&gt; import .Bar
 
 julia&gt; x = -1;
 
 julia&gt; Bar.foo()
-1</code></pre><p>Thus <em>lexical scope</em> means that the scope of variables can be inferred from the source code alone.</p><h2><a class="nav-anchor" id="Global-Scope-1" href="#Global-Scope-1">Global Scope</a></h2><p>Each module introduces a new global scope, separate from the global scope of all other modules; there is no all-encompassing global scope. Modules can introduce variables of other modules into their scope through the <a href="modules.html#modules-1">using or import</a> statements or through qualified access using the dot-notation, i.e. each module is a so-called <em>namespace</em>. Note that variable bindings can only be changed within their global scope and not from an outside module.</p><pre><code class="language-julia-repl">julia&gt; module A
+1</code></pre><!--
+Thus *lexical scope* means that the scope of variables can be inferred from the source code alone.
+--><p>このように、<strong>レキシカルスコープ</strong> は変数のスコープは、ソースコードのみから推論できることを意味します。</p><p>`<a href="## Global Scope"></a></p><h2><a class="nav-anchor" id="グローバルスコープ-1" href="#グローバルスコープ-1">グローバルスコープ</a></h2><!--
+Each module introduces a new global scope, separate from the global scope of all other modules;
+there is no all-encompassing global scope. Modules can introduce variables of other modules into
+their scope through the [using or import](@ref modules) statements or through qualified access using the
+dot-notation, i.e. each module is a so-called *namespace*. Note that variable bindings can only
+be changed within their global scope and not from an outside module.
+--><p>各モジュールは新しいグローバルスコープを導入するので、他のすべてのモジュールと分離しています。 すべてを包括するグローバルスコープは存在しません。 モジュールには他のモジュールの変数を自身のスコープに導入することができます。 これは<a href="modules.html#modules-1">using または import</a>文を通じて、あるいはドット表記を使った限定的なアクセスを通じて導入できます。 つまり各モジュールはいわゆる <strong>名前空間</strong> です。 変数の束縛を変更できるのは、グローバルスコープ内のみで、モジュール外では、できない点に注意してください。</p><pre><code class="language-julia-repl">julia&gt; module A
            a = 1 # a global in A&#39;s scope
        end;
 
@@ -51,12 +107,34 @@ julia&gt; module E
            import ..A # make module A available
            A.a = 2    # throws below error
        end;
-ERROR: cannot assign variables in other modules</code></pre><p>Note that the interactive prompt (aka REPL) is in the global scope of the module <code>Main</code>.</p><h2><a class="nav-anchor" id="Local-Scope-1" href="#Local-Scope-1">Local Scope</a></h2><p>A new local scope is introduced by most code blocks (see above <a href="variables-and-scoping.html#man-scope-table-1">table</a> for a complete list). A local scope inherits all the variables from a parent local scope, both for reading and writing. Additionally, the local scope inherits all globals that are assigned to in its parent global scope block (if it is surrounded by a global <code>if</code> or <code>begin</code> scope). Unlike global scopes, local scopes are not namespaces, thus variables in an inner scope cannot be retrieved from the parent scope through some sort of qualified access.</p><p>The following rules and examples pertain to local scopes. A newly introduced variable in a local scope does not back-propagate to its parent scope. For example, here the <span>$z$</span> is not introduced into the top-level scope:</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
+ERROR: cannot assign variables in other modules</code></pre><!--
+Note that the interactive prompt (aka REPL) is in the global scope of the module `Main`.
+--><p>対話プロンプト(別名 REPL)はモジュール<code>Main</code>のグローバルスコープである点に注意してください。</p><p>`<a href="## Local Scope"></a></p><h2><a class="nav-anchor" id="ローカルスコープ-1" href="#ローカルスコープ-1">ローカルスコープ</a></h2><!--
+A new local scope is introduced by most code blocks (see above
+[table](@ref man-scope-table) for a complete list).
+A local scope inherits all the variables from a parent local scope,
+both for reading and writing.
+Additionally, the local scope inherits all globals that are assigned
+to in its parent global scope block (if it is surrounded by a global `if` or `begin` scope).
+Unlike global scopes, local scopes are not namespaces,
+thus variables in an inner scope cannot be retrieved from the parent scope through some sort of
+qualified access.
+--><p>ほとんどのコードブロックで新しいローカルスコープが導入されます。（完全なリストは上の<a href="variables-and-scoping.html#man-scope-table-1">表</a>を参照） ローカルスコープは親のローカルスコープにあるすべての変数を、読み書きともに引き継ぎます。 さらに、親のグローバルスコープブロック（グローバルな<code>if</code>や<code>begin</code>に囲まれたブロック）に割り当てられたグローバル変数を引き継ぎます。 また、内側のスコープにある変数は親のスコープからなんらかの限定的なアクセスによって取り出すことはできません。</p><!--
+The following rules and examples pertain to local scopes.
+A newly introduced variable in a local scope does not
+back-propagate to its parent scope.
+For example, here the ``z`` is not introduced into the top-level scope:
+--><p>以下の規則と例はローカルスコープに関するものです。 ローカルスコープに新しく導入される変数は、親のスコープに逆伝播しません。 例えば、ここにある<span>$z$</span>はトップレベルのスコープに導入されません。</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
            z = i
        end
 
 julia&gt; z
-ERROR: UndefVarError: z not defined</code></pre><p>(Note, in this and all following examples it is assumed that their top-level is a global scope with a clean workspace, for instance a newly started REPL.)</p><p>Inside a local scope a variable can be forced to be a new local variable using the <code>local</code> keyword:</p><pre><code class="language-julia-repl">julia&gt; x = 0;
+ERROR: UndefVarError: z not defined</code></pre><!--
+(Note, in this and all following examples it is assumed that their top-level is a global scope
+with a clean workspace, for instance a newly started REPL.)
+
+Inside a local scope a variable can be forced to be a new local variable using the `local` keyword:
+--><p>（これ以降の例では、トップレベルが、新規に起動されたREPLなどの潔白な作業領域をもつ、グローバルスコープであることを想定している点に、 注意してください。）</p><p>ローカルスコープ内で、<code>local</code>キーワードを使って、変数を強制的に新しいローカル変数にすることができます。</p><pre><code class="language-julia-repl">julia&gt; x = 0;
 
 julia&gt; for i = 1:10
            local x # this is also the default
@@ -64,19 +142,38 @@ julia&gt; for i = 1:10
        end
 
 julia&gt; x
-0</code></pre><p>Inside a local scope a global variable can be assigned to by using the keyword <code>global</code>:</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
+0</code></pre><!--
+Inside a local scope a global variable can be assigned to by using the keyword `global`:
+--><p>ローカルスコープ内で<code>global</code>変数を使ってグローバル変数に代入することができます。</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
            global z
            z = i
        end
 
 julia&gt; z
-10</code></pre><p>The location of both the <code>local</code> and <code>global</code> keywords within the scope block is irrelevant. The following is equivalent to the last example (although stylistically worse):</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
+10</code></pre><!--
+The location of both the `local` and `global` keywords within the scope block is irrelevant.
+The following is equivalent to the last example (although stylistically worse):
+--><p>スコープブロック内の<code>local</code>と<code>global</code>のキーワードの位置は共に無関係です。 下記のものは、直前の例と同等です（表記としては良くないですが）</p><pre><code class="language-julia-repl">julia&gt; for i = 1:10
            z = i
            global z
        end
 
 julia&gt; z
-10</code></pre><p>The <code>local</code> and <code>global</code> keywords can also be applied to destructuring assignments, e.g. <code>local x, y = 1, 2</code>. In this case the keyword affects all listed variables.</p><p>Local scopes are introduced by most block keywords, with notable exceptions of <code>begin</code> and <code>if</code>.</p><p>In a local scope, all variables are inherited from its parent global scope block unless:</p><ul><li>an assignment would result in a modified <em>global</em> variable, or</li><li>a variable is specifically marked with the keyword <code>local</code>.</li></ul><p>Thus global variables are only inherited for reading but not for writing:</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
+10</code></pre><!--
+The `local` and `global` keywords can also be applied to destructuring assignments, e.g.
+`local x, y = 1, 2`. In this case the keyword affects all listed variables.
+
+Local scopes are introduced by most block keywords,
+with notable exceptions of `begin` and `if`.
+--><p><code>local</code>と<code>global</code>のキーワードは、例えば<code>local x, y = 1, 2</code>のように、分割代入にも適用されます。 この場合、キーワードはすべての列挙した変数に影響します。</p><p>ローカルスコープは大抵のブロックキーワードで導入されますが、注目すべき例外は<code>begin</code>と<code>if</code>です。</p><!--
+In a local scope, all variables are inherited from its parent
+global scope block unless:
+
+  * an assignment would result in a modified *global* variable, or
+  * a variable is specifically marked with the keyword `local`.
+--><p>ローカルスコープでは、すべての変数を親のグローバルスコープブロックから、以下の場合を除き引き継ぎます。</p><ul><li>代入によって <strong>グローバル</strong> 変数が変更されている</li><li>変数にキーワード<code>local</code>をわざわざつけている。</li></ul><!--
+Thus global variables are only inherited for reading but not for writing:
+--><p>このように、グローバル変数が引き継ぐのは、読取りだけで、書込みは引き継ぎません。</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
 
 julia&gt; function foo()
            x = 2        # assignment introduces a new local
@@ -87,7 +184,17 @@ julia&gt; foo()
 4
 
 julia&gt; x
-1</code></pre><p>An explicit <code>global</code> is needed to assign to a global variable:</p><div class="admonition sidebar"><div class="admonition-title">Avoiding globals</div><div class="admonition-text"><p>Avoiding changing the value of global variables is considered by many to be a programming best-practice. One reason for this is that remotely changing the state of global variables in other modules should be done with care as it makes the local behavior of the program hard to reason about. This is why the scope blocks that introduce local scope require the <span>$global$</span> keyword to declare the intent to modify a global variable.</p></div></div><pre><code class="language-julia-repl">julia&gt; x = 1;
+1</code></pre><!--
+An explicit `global` is needed to assign to a global variable:
+--><p>グローバル変数に代入するには、わざわざ<code>global</code>を付ける必要があります。</p><!--
+!!! sidebar "Avoiding globals"
+    Avoiding changing the value of global variables is considered by many
+    to be a programming best-practice.
+    One reason for this is that remotely changing the state of global variables in other
+    modules should be done with care as it makes the local behavior of the program hard to reason about.
+    This is why the scope blocks that introduce local scope require the ``global``
+    keyword to declare the intent to modify a global variable.
+--><div class="admonition sidebar"><div class="admonition-title">グローバル変数を避ける</div><div class="admonition-text"><p>グローバル変数の値の変更を避けることは、多くの人がベストプラクティスだと考えています。 他のモジュールのグローバル変数の状態を遠隔で変更すると、プログラムのローカルな挙動を推論するのが困難になるので 注意を払うべきだ、というのが理由の一つです。 ローカルスコープを導入したブロックで グローバル変数を変更する旨を宣言するには、<span>$global$</span>キーワードが必要なのは、 このためです。</p></div></div><pre><code class="language-julia-repl">julia&gt; x = 1;
 
 julia&gt; function foobar()
            global x = 2
@@ -96,13 +203,16 @@ julia&gt; function foobar()
 julia&gt; foobar();
 
 julia&gt; x
-2</code></pre><p>Note that <em>nested functions</em> can modify their parent scope&#39;s <em>local</em> variables:</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
+2</code></pre><!--
+Note that *nested functions* can modify their parent scope's *local* variables:
+--><p><strong>ネストした関数</strong> は親のスコープの <strong>local</strong> 変数を変更できる点に注意してください。</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
 
 julia&gt; function baz()
            x = 2 # introduces a new local
            function bar()
                x = 10       # modifies the parent&#39;s x
-               return x + y # y is global
+               ret
+               urn x + y # y is global
            end
            return bar() + x # 12 + 10 (x is modified in call of bar())
        end;
@@ -111,7 +221,12 @@ julia&gt; baz()
 22
 
 julia&gt; x, y # verify that global x and y are unchanged
-(1, 2)</code></pre><p>The reason to allow <em>modifying local</em> variables of parent scopes in nested functions is to allow constructing <a href="https://en.wikipedia.org/wiki/Closure_%28computer_programming%29"><code>closures</code></a> which have a private state, for instance the <span>$state$</span> variable in the following example:</p><pre><code class="language-julia-repl">julia&gt; let state = 0
+(1, 2)</code></pre><!--
+The reason to allow *modifying local* variables of parent scopes in
+nested functions is to allow constructing [`closures`](https://en.wikipedia.org/wiki/Closure_%28computer_programming%29)
+which have a private state, for instance the ``state`` variable in the
+following example:
+--><p>ネストした関数で親のスコープの <strong>ローカル変数を変更できる</strong>　理由は、 プライベートな状態を保持する <a href="https://en.wikipedia.org/wiki/Closure_%28computer_programming%29"><code>クロージャ</code></a> を構成できるようにするためです。 以下の例の <span>$state$</span> 変数が具体例です。</p><pre><code class="language-julia-repl">julia&gt; let state = 0
            global counter() = (state += 1)
        end;
 
@@ -119,7 +234,18 @@ julia&gt; counter()
 1
 
 julia&gt; counter()
-2</code></pre><p>See also the closures in the examples in the next two sections. A variable such as <code>x</code> in the first example and <code>state</code> in the second that is inherited from the enclosing scope by the inner function is sometimes called a <em>captured</em> variable. Captured variables can present performance challenges discussed in <a href="performance-tips.html#man-performance-tips-1">performance tips</a>.</p><p>The distinction between inheriting global scope and nesting local scope can lead to some slight differences between functions defined in local vs. global scopes for variable assignments. Consider the modification of the last example by moving <code>bar</code> to the global scope:</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
+2</code></pre><!--
+See also the closures in the examples in the next two sections. A variable
+such as `x` in the first example and `state` in the second that is inherited
+from the enclosing scope by the inner function is sometimes called a
+*captured* variable. Captured variables can present performance challenges
+discussed in [performance tips](@ref man-performance-tips).
+--><p>クロージャの例としては、次の２セクションも参照してください。 最初の例の<code>x</code>や二番目の例の<code>state</code>などは、周囲のスコープから内部の関数に引き継がれており、 <strong>捕捉された</strong> 変数と呼ばれます。 捕捉された変数がパフォーマンスの困難となりうる問題についての議論が<a href="performance-tips.html#man-performance-tips-1">パフォーマンスティップス</a> にあります。</p><!--
+The distinction between inheriting global scope and nesting local scope
+can lead to some slight differences between functions
+defined in local vs. global scopes for variable assignments.
+Consider the modification of the last example by moving `bar` to the global scope:
+--><p>グローバルスコープの引き継ぎとローカルスコープのネストの違いから、 ローカルスコープとグローバルスコープで定義された、変数の代入をおこなう関数が少しちがってきます。 最後の例の<code>bar</code>をグローバルスコープに移して少し変えることを考えてみましょう。</p><pre><code class="language-julia-repl">julia&gt; x, y = 1, 2;
 
 julia&gt; function bar()
            x = 10 # local, no longer a closure variable
@@ -135,7 +261,14 @@ julia&gt; quz()
 14
 
 julia&gt; x, y # verify that global x and y are unchanged
-(1, 2)</code></pre><p>Note that the above nesting rules do not pertain to type and macro definitions as they can only appear at the global scope. There are special scoping rules concerning the evaluation of default and keyword function arguments which are described in the <a href="functions.html#man-functions-1">Function section</a>.</p><p>An assignment introducing a variable used inside a function, type or macro definition need not come before its inner usage:</p><pre><code class="language-julia-repl">julia&gt; f = y -&gt; y + a;
+(1, 2)</code></pre><!--
+Note that the above nesting rules do not pertain to type and macro definitions as they can only appear
+at the global scope. There are special scoping rules concerning the evaluation of default and
+keyword function arguments which are described in the [Function section](@ref man-functions).
+
+An assignment introducing a variable used inside a function, type or macro definition need not
+come before its inner usage:
+--><p>上記のネストの規則は、型やマクロの定義には関係ありません。 これは、グローバルスコープのみに表れるからです。 関数の引数のデフォルトとキーワードの評価に関連する特殊なスコープ規則については<a href="functions.html#man-functions-1">関数のセクション</a> に記述があります。</p><p>関数、型、マクロの定義の内部で使われる変数を導入して行う代入は、必ずしも内部の定義での前に行う必要はありません。</p><pre><code class="language-julia-repl">julia&gt; f = y -&gt; y + a;
 
 julia&gt; f(3)
 ERROR: UndefVarError: a not defined
@@ -146,7 +279,14 @@ julia&gt; a = 1
 1
 
 julia&gt; f(3)
-4</code></pre><p>This behavior may seem slightly odd for a normal variable, but allows for named functions – which are just normal variables holding function objects – to be used before they are defined. This allows functions to be defined in whatever order is intuitive and convenient, rather than forcing bottom up ordering or requiring forward declarations, as long as they are defined by the time they are actually called. As an example, here is an inefficient, mutually recursive way to test if positive integers are even or odd:</p><pre><code class="language-julia-repl">julia&gt; even(n) = (n == 0) ? true : odd(n - 1);
+4</code></pre><!--
+This behavior may seem slightly odd for a normal variable, but allows for named functions -- which
+are just normal variables holding function objects -- to be used before they are defined. This
+allows functions to be defined in whatever order is intuitive and convenient, rather than forcing
+bottom up ordering or requiring forward declarations, as long as they are defined by the time
+they are actually called. As an example, here is an inefficient, mutually recursive way to test
+if positive integers are even or odd:
+--><p>この挙動は、通常の変数としては少し変に思えるかもしれませんが、名前付き関数では、可能なことです。 名前付き関数は、関数オブジェクトを保持する単なる通常の変数で、定義を行う前に利用します。 これによって、実際に関数が呼ばれる前に定義されている限り、関数の定義をどんな順番でも、直感的で便利に行うことができ、 ボトムアップの順序や事前の宣言にこだわる必要はありません。 ここであげるのは、非効率で相互再帰な方法でおこなう、正の整数が偶数か奇数かを検査する例です。</p><pre><code class="language-julia-repl">julia&gt; even(n) = (n == 0) ? true : odd(n - 1);
 
 julia&gt; odd(n) = (n == 0) ? false : even(n - 1);
 
@@ -154,14 +294,29 @@ julia&gt; even(3)
 false
 
 julia&gt; odd(3)
-true</code></pre><p>Julia provides built-in, efficient functions to test for oddness and evenness called <a href="../base/numbers.html#Base.iseven"><code>iseven</code></a> and <a href="../base/numbers.html#Base.isodd"><code>isodd</code></a> so the above definitions should only be considered to be examples of scope, not efficient design.</p><h3><a class="nav-anchor" id="Let-Blocks-1" href="#Let-Blocks-1">Let Blocks</a></h3><p>Unlike assignments to local variables, <code>let</code> statements allocate new variable bindings each time they run. An assignment modifies an existing value location, and <code>let</code> creates new locations. This difference is usually not important, and is only detectable in the case of variables that outlive their scope via closures. The <code>let</code> syntax accepts a comma-separated series of assignments and variable names:</p><pre><code class="language-julia-repl">julia&gt; x, y, z = -1, -1, -1;
+true</code></pre><!--
+Julia provides built-in, efficient functions to test for oddness and evenness called [`iseven`](@ref)
+and [`isodd`](@ref) so the above definitions should only be considered to be examples of scope,
+not efficient design.
+--><p>Juliaには、組込みの効率的な偶数性や奇数性を確認する<a href="../base/numbers.html#Base.iseven"><code>iseven</code></a>や<a href="../base/numbers.html#Base.isodd"><code>isodd</code></a>といった関数があるので、 上記の例は、効率的な設計ではなくスコープの例としてだけ考えるべきでしょう。</p><p>`<a href="### Let Blocks"></a></p><h3><a class="nav-anchor" id="Let-ブロック-1" href="#Let-ブロック-1">Let ブロック</a></h3><!--
+Unlike assignments to local variables, `let` statements allocate new variable bindings each time
+they run. An assignment modifies an existing value location, and `let` creates new locations.
+This difference is usually not important, and is only detectable in the case of variables that
+outlive their scope via closures. The `let` syntax accepts a comma-separated series of assignments
+and variable names:
+--><p>ローカル変数の代入とは違い、<code>let</code>文は毎回実行時に新しく変数の束縛しメモリを割り当てます。 代入は既存の場所の値を変更し、<code>let</code>では新しい場所に生成します。 この違いは、通常それほど重要ではなく、検出できるのもスコープ外のクロージャに変数があるときのみです。 <code>let</code>構文はコンマで区切った一連の代入と変数名を受け取ります。</p><pre><code class="language-julia-repl">julia&gt; x, y, z = -1, -1, -1;
 
 julia&gt; let x = 1, z
            println(&quot;x: $x, y: $y&quot;) # x is local variable, y the global
            println(&quot;z: $z&quot;) # errors as z has not been assigned yet but is local
        end
 x: 1, y: -1
-ERROR: UndefVarError: z not defined</code></pre><p>The assignments are evaluated in order, with each right-hand side evaluated in the scope before the new variable on the left-hand side has been introduced. Therefore it makes sense to write something like <code>let x = x</code> since the two <code>x</code> variables are distinct and have separate storage. Here is an example where the behavior of <code>let</code> is needed:</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2); i = 1;
+ERROR: UndefVarError: z not defined</code></pre><!--
+The assignments are evaluated in order, with each right-hand side evaluated in the scope before
+the new variable on the left-hand side has been introduced. Therefore it makes sense to write
+something like `let x = x` since the two `x` variables are distinct and have separate storage.
+Here is an example where the behavior of `let` is needed:
+--><p>代入は順番に評価されます。 それぞれ右辺は左辺の新しい変数が導入される前に評価されます。 そのため、<code>let x = x</code>のような式も意味があり、２つの変数<code>x</code>は異なり、別々に格納されています。 こういう<code>let</code>の挙動が必要な例を挙げます。</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2); i = 1;
 
 julia&gt; while i &lt;= 2
            Fs[i] = ()-&gt;i
@@ -172,7 +327,11 @@ julia&gt; Fs[1]()
 3
 
 julia&gt; Fs[2]()
-3</code></pre><p>Here we create and store two closures that return variable <code>i</code>. However, it is always the same variable <code>i</code>, so the two closures behave identically. We can use <code>let</code> to create a new binding for <code>i</code>:</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2); i = 1;
+3</code></pre><!--
+Here we create and store two closures that return variable `i`. However, it is always the same
+variable `i`, so the two closures behave identically. We can use `let` to create a new binding
+for `i`:
+--><p>ここでは、変数<code>i</code>を返すクロージャを生成し。格納します。 しかし、<code>i</code>は常に同じ変数で、２つのクロージャは全く同等の挙動をします。 <code>let</code>を新しい束縛の<code>i</code>を生成するために利用することができます。</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2); i = 1;
 
 julia&gt; while i &lt;= 2
            let i = i
@@ -185,14 +344,24 @@ julia&gt; Fs[1]()
 1
 
 julia&gt; Fs[2]()
-2</code></pre><p>Since the <code>begin</code> construct does not introduce a new scope, it can be useful to use a zero-argument <code>let</code> to just introduce a new scope block without creating any new bindings:</p><pre><code class="language-julia-repl">julia&gt; let
+2</code></pre><!--
+Since the `begin` construct does not introduce a new scope, it can be useful to use a zero-argument
+`let` to just introduce a new scope block without creating any new bindings:
+--><p><code>begin</code>構文は新しいスコープを導入しないので、引数のない<code>let</code>を使って単に新しいスコープブロックを導入するだけで、 新しい束縛を生成しないのも、役に立つこともあります。</p><pre><code class="language-julia-repl">julia&gt; let
            local x = 1
            let
                local x = 2
            end
            x
        end
-1</code></pre><p>Since <code>let</code> introduces a new scope block, the inner local <code>x</code> is a different variable than the outer local <code>x</code>.</p><h3><a class="nav-anchor" id="For-Loops-and-Comprehensions-1" href="#For-Loops-and-Comprehensions-1">For Loops and Comprehensions</a></h3><p><code>for</code> loops, <code>while</code> loops, and <a href="arrays.html#Comprehensions-1">Comprehensions</a> have the following behavior: any new variables introduced in their body scopes are freshly allocated for each loop iteration, as if the loop body were surrounded by a <code>let</code> block:</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2);
+1</code></pre><!--
+Since `let` introduces a new scope block, the inner local `x` is a different variable than the
+outer local `x`.
+--><p><code>let</code>は新しいスコープブロックを導入するので、内側のローカル変数 <code>x</code>は外側のローカル変数 <code>x</code>と異なります。</p><p>`<a href="### For Loops and Comprehensions"></a></p><h3><a class="nav-anchor" id="For-ループと内包表記-1" href="#For-ループと内包表記-1">For ループと内包表記</a></h3><!--
+`for` loops, `while` loops, and [Comprehensions](@ref) have the following behavior: any new variables
+introduced in their body scopes are freshly allocated for each loop iteration, as if the loop body
+were surrounded by a `let` block:
+--><p><code>for</code>ループ、<code>while</code>ループ、<a href="manual/@ref">内包表記</a>は以下のような挙動を取ります。 ループ本体のスコープの導入されるすべての新しい変数はループの反復ごとに新しくメモリに割当てられて、 ループの本体が<code>let</code>ブロックに囲まれているかのようにふるまう。</p><pre><code class="language-julia-repl">julia&gt; Fs = Vector{Any}(undef, 2);
 
 julia&gt; for j = 1:2
            Fs[j] = ()-&gt;j
@@ -202,7 +371,9 @@ julia&gt; Fs[1]()
 1
 
 julia&gt; Fs[2]()
-2</code></pre><p>A <code>for</code> loop or comprehension iteration variable is always a new variable:</p><pre><code class="language-julia-repl">julia&gt; function f()
+2</code></pre><!--
+A `for` loop or comprehension iteration variable is always a new variable:
+--><p><code>for</code>ループや内包表記の反復で、変数は常に新しい変数です。</p><pre><code class="language-julia-repl">julia&gt; function f()
            i = 0
            for i = 1:3
            end
@@ -210,7 +381,10 @@ julia&gt; Fs[2]()
        end;
 
 julia&gt; f()
-0</code></pre><p>However, it is occasionally useful to reuse an existing variable as the iteration variable. This can be done conveniently by adding the keyword <code>outer</code>:</p><pre><code class="language-julia-repl">julia&gt; function f()
+0</code></pre><!--
+However, it is occasionally useful to reuse an existing variable as the iteration variable.
+This can be done conveniently by adding the keyword `outer`:
+--><p>しかし、既存の変数を反復の変数として再利用するのも、役に立つときがあります。 これを行うには、<code>outer</code>キーワードを使うと便利です。</p><pre><code class="language-julia-repl">julia&gt; function f()
            i = 0
            for outer i = 1:3
            end
@@ -218,23 +392,51 @@ julia&gt; f()
        end;
 
 julia&gt; f()
-3</code></pre><h2><a class="nav-anchor" id="Constants-1" href="#Constants-1">Constants</a></h2><p>A common use of variables is giving names to specific, unchanging values. Such variables are only assigned once. This intent can be conveyed to the compiler using the <code>const</code> keyword:</p><pre><code class="language-julia-repl">julia&gt; const e  = 2.71828182845904523536;
+3</code></pre><p>`<a href="## Constants"></a></p><h2><a class="nav-anchor" id="定数-1" href="#定数-1">定数</a></h2><!--
+A common use of variables is giving names to specific, unchanging values. Such variables are only
+assigned once. This intent can be conveyed to the compiler using the `const` keyword:
+--><p>変数のよくある使い方として、特定の変化しない値に名前をつけることがあります。 こういった変数はたった一度代入されるだけです。 こうした意図は<code>const</code>キーワードを使ってコンパイラに伝えることができます。</p><pre><code class="language-julia-repl">julia&gt; const e  = 2.71828182845904523536;
 
 julia&gt; const pi = 3.14159265358979323846;</code></pre><p>Multiple variables can be declared in a single <code>const</code> statement:</p><pre><code class="language-julia-repl">julia&gt; const a, b = 1, 2
-(1, 2)</code></pre><p>The <code>const</code> declaration should only be used in global scope on globals. It is difficult for the compiler to optimize code involving global variables, since their values (or even their types) might change at almost any time. If a global variable will not change, adding a <code>const</code> declaration solves this performance problem.</p><p>Local constants are quite different. The compiler is able to determine automatically when a local variable is constant, so local constant declarations are not necessary, and in fact are currently not supported.</p><p>Special top-level assignments, such as those performed by the <code>function</code> and <code>struct</code> keywords, are constant by default.</p><p>Note that <code>const</code> only affects the variable binding; the variable may be bound to a mutable object (such as an array), and that object may still be modified. Additionally when one tries to assign a value a variable that is declared constant the following scenarios are possible:</p><ul><li>if a new value has a different type than the type of the constant then an error is thrown:</li></ul><pre><code class="language-julia-repl">julia&gt; const x = 1.0
+(1, 2)</code></pre><!--
+The `const` declaration should only be used in global scope on globals.
+It is difficult for the compiler to optimize code involving global variables, since
+their values (or even their types) might change at almost any time. If a global variable will
+not change, adding a `const` declaration solves this performance problem.
+--><p><code>const</code>宣言はグローバルスコープにあるグローバル変数に対してだけ行うべきです。 コンパイラがグローバル変数を含むコードを最適化するのは、困難です。 というのもその値（や型でさえも）ほとんどいつでも変わりうるからです。 グローバル変数が変化しない時には、<code>const</code>宣言によってこのパフォーマンスの問題が解決します。</p><!--
+Local constants are quite different. The compiler is able to determine automatically when a local
+variable is constant, so local constant declarations are not necessary, and in fact are currently
+not supported.
+
+Special top-level assignments, such as those performed by the `function` and `struct` keywords,
+are constant by default.
+--><p>ローカル変数は全く異なります。 ローカル変数が一定の時は、自動的に決定可能です。 そのため、定数の宣言は必要なく、実のところ対応していません。</p><p><code>function</code>や<code>struct</code>キーワードで実行されるような、特殊なトップレベルの代入は、デフォルトでは定数です。</p><!--
+Note that `const` only affects the variable binding; the variable may be bound to a mutable
+object (such as an array), and that object may still be modified. Additionally when one tries
+to assign a value a variable that is declared constant the following scenarios are possible:
+--><p><code>const</code>は変数束縛だけに影響する点に注意してください。 変数は（配列のような）可変オブジェクトを束縛してもいいので、変更可能かもしれません。 さらに、定数だと宣言した変数に値を代入しようとする、以下のようなシナリオもありえます。</p><!--
+* if a new value has a different type than the type of the constant then an error is thrown:
+--><ul><li>新しい値が定数の型と異なる型の時、エラーが投げられます。</li></ul><pre><code class="language-julia-repl">julia&gt; const x = 1.0
 1.0
 
 julia&gt; x = 1
-ERROR: invalid redefinition of constant x</code></pre><ul><li>if a new value has the same type as the constant then a warning is printed:</li></ul><pre><code class="language-julia-repl">julia&gt; const y = 1.0
+ERROR: invalid redefinition of constant x</code></pre>
+<!--
+* if a new value has the same type as the constant then a warning is printed:
+--><ul><li>新しい値が定数と同じ型の時、警告が表示される。</li></ul><pre><code class="language-julia-repl">julia&gt; const y = 1.0
 1.0
 
 julia&gt; y = 2.0
 WARNING: redefining constant y
-2.0</code></pre><ul><li>if an assignment would not result in the change of variable value no message is given:</li></ul><pre><code class="language-julia-repl">julia&gt; const z = 100
+2.0</code></pre><!--
+* if an assignment would not result in the change of variable value no message is given:
+--><p>代入が結果として変数の値を変えない時、メッセージを出さない。</p><pre><code class="language-julia-repl">julia&gt; const z = 100
 100
 
 julia&gt; z = 100
-100</code></pre><p>The last rule applies for immutable objects even if the vairable binding would change, e.g.:</p><pre><code class="language-julia-repl">julia&gt; const s1 = &quot;1&quot;
+100</code></pre><!--
+The last rule applies for immutable objects even if the vairable binding would change, e.g.:
+--><p>最後の規則は変数の束縛が変わりうる時も、不変オブジェクトに適用されます。</p><pre><code class="language-julia-repl">julia&gt; const s1 = &quot;1&quot;
 &quot;1&quot;
 
 julia&gt; s2 = &quot;1&quot;
@@ -251,14 +453,20 @@ julia&gt; s1 = s2
 julia&gt; pointer.([s1, s2], 1)
 2-element Array{Ptr{UInt8},1}:
  Ptr{UInt8} @0x0000000013dd3d18
- Ptr{UInt8} @0x0000000013dd3d18</code></pre><p>However, for mutable objects the warning is printed as expected:</p><pre><code class="language-julia-repl">julia&gt; const a = [1]
+ Ptr{UInt8} @0x0000000013dd3d18</code></pre><!--
+However, for mutable objects the warning is printed as expected:
+--><p>しかし、可変オブジェクトには想定通り警告が表示されます。</p><pre><code class="language-julia-repl">julia&gt; const a = [1]
 1-element Array{Int64,1}:
  1
 
 julia&gt; a = [1]
 WARNING: redefining constant a
 1-element Array{Int64,1}:
- 1</code></pre><p>Note that although possible, changing the value of a variable that is declared as constant is strongly discouraged. For instance, if a method references a constant and is already compiled before the constant is changed then it might keep using the old value:</p><pre><code class="language-julia-repl">julia&gt; const x = 1
+ 1</code></pre><!--
+Note that although possible, changing the value of a variable that is declared as constant
+is strongly discouraged. For instance, if a method references a constant and is already
+compiled before the constant is changed then it might keep using the old value:
+--><p>定数だと宣言した変数の値を変更することは、もし可能であっても、強く反対します。 例えば、定数を参照するメソッドは、定数の変更される前にすでにコンパイルされて、古い値のまま使われ続けます。</p><pre><code class="language-julia-repl">julia&gt; const x = 1
 1
 
 julia&gt; f() = x
@@ -272,4 +480,4 @@ WARNING: redefining constant x
 2
 
 julia&gt; f()
-1</code></pre><footer><hr/><a class="previous" href="control-flow.html"><span class="direction">Previous</span><span class="title">制御フロー</span></a><a class="next" href="types.html"><span class="direction">Next</span><span class="title">Types</span></a></footer></article></body></html>
+1</code></pre><footer><hr/><a class="previous" href="control-flow.html"><span class="direction">Previous</span><span class="title">制御フロー</span></a><a class="next" href="types.html"><span class="direction">Next</span><span class="title">型</span></a></footer></article></body></html>
