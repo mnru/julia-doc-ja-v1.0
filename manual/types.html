@@ -481,7 +481,7 @@ julia&gt; Point{Float64} &lt;: Point{Real}
 false</code></pre><!--
 !!! warning
     This last point is *very* important: even though `Float64 <: Real` we **DO NOT** have `Point{Float64} <: Point{Real}`.
---><div class="admonition warning"><div class="admonition-title">Warning</div><div class="admonition-text"></div></div><p>この最後の点は <strong>非常に</strong> 重要です。<code>Float64 &lt;: Real</code>は成り立つにもかかわらず、    <code>Point{Float64} &lt;: Point{Real}</code>は　<strong>成り立ちません</strong>。</p><!--
+--><div class="admonition warning"><div class="admonition-title">警告</div><div class="admonition-text"><p>この最後の点は <strong>非常に</strong> 重要です。<code>Float64 &lt;: Real</code>は成り立つにもかかわらず、<code>Point{Float64} &lt;: Point{Real}</code>は　<strong>成り立ちません</strong>。</p></div></div><!--
 In other words, in the parlance of type theory, Julia's type parameters are *invariant*, rather
 than being [covariant (or even contravariant)](https://en.wikipedia.org/wiki/Covariance_and_contravariance_%28computer_science%29). This is for practical reasons: while any instance
 of `Point{Float64}` may conceptually be like an instance of `Point{Real}` as well, the two types
@@ -567,10 +567,10 @@ be discussed until later on in [Constructors](@ref man-constructors).
 --><p>このような型の混ざった場合でも適切に処理するコンストラクタメソッドは定義可能ですが、後述の[コンストラクタ]（@ ref man-constructors）まで議論を保留します。</p><p>`<a href="### Parametric Abstract Types"></a></p><h3><a class="nav-anchor" id="パラメータ抽象型-1" href="#パラメータ抽象型-1">パラメータ抽象型</a></h3><!--
 Parametric abstract type declarations declare a collection of abstract types, in much the same
 way:
---><p>パラメータ抽象型に対しても、ほぼ同じ方法で、抽象型の一群に対して型宣言を行います。</p><pre><code class="language-julia-repl">julia&gt; abstract type Pointy{T} end</code></pre><!--
+--><p>パラメータ抽象型に対しても、ほぼ同じ方法で、一群の抽象型に対して型宣言を行います。</p><pre><code class="language-julia-repl">julia&gt; abstract type Pointy{T} end</code></pre><!--
 With this declaration, `Pointy{T}` is a distinct abstract type for each type or integer value
 of `T`. As with parametric composite types, each such instance is a subtype of `Pointy`:
---><p>この宣言ではPointy{T}は、型や整数値を表すTそれぞれに対して別々の抽象型になります。 パラメータ複合型と同様に、各インスタンスはPointyのサブタイプです。</p><pre><code class="language-julia-repl">julia&gt; Pointy{Int64} &lt;: Pointy
+--><p>この宣言では、<code>T</code>は型や整数値を表し、<code>Pointy{T}</code>は、それぞれに対して別々の抽象型になります。 パラメータ複合型と同様に、各インスタンスは<code>Pointy</code>のサブタイプです。</p><pre><code class="language-julia-repl">julia&gt; Pointy{Int64} &lt;: Pointy
 true
 
 julia&gt; Pointy{1} &lt;: Pointy
