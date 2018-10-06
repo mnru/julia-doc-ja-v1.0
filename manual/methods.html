@@ -14,7 +14,7 @@ of arguments: adding two integers is very different from adding two floating-poi
 of which are distinct from adding an integer to a floating-point number. Despite their implementation
 differences, these operations all fall under the general concept of "addition". Accordingly, in
 Julia, these behaviors all belong to a single object: the `+` function.
---><p><a href="functions.html#man-functions-1">関数</a> の章を思い出してください。関数とは、引数のタプルを受け取り、戻り値を返す、または適切な値が返せない場合は例外を投げる、オブジェクトです。 概念的には等しい関数や演算が、引数の型によって実装がまったく異なる、ということはよくあります。 2つの整数を足すことと、2つの浮動小数点数を足すことは、全く異なるし、整数に浮動小数点数を足すこととも異なります。 実装が違っていても、これらの操作はすべて、一般的な概念の「足し算」に当てはまります。 したがって、Juliaでは、これらの挙動はすべて1つのオブジェクト「<code>+</code>関数」に属します。</p><!--
+--><p><a href="functions.html#man-functions-1">関数</a> の章を思い出してください。 関数とは、引数のタプルを受け取り、戻り値を返す、または適切な値を返せない場合は例外を投げる、オブジェクトです。 概念的には等しい関数や演算が、引数の型によって実装がまったく異なる、ということはよくあります。 2つの整数を足すことと、2つの浮動小数点数を足すことは、全く異なるし、整数に浮動小数点数を足すこととも異なります。 実装が違っていても、これらの操作はすべて、一般的な概念の「足し算」に当てはまります。 したがって、Juliaでは、これらの挙動はすべて1つのオブジェクト「<code>+</code>関数」に属します。</p><!--
 To facilitate using many different implementations of the same concept smoothly, functions need
 not be defined all at once, but can rather be defined piecewise by providing specific behaviors
 for certain combinations of argument types and counts. A definition of one possible behavior for
@@ -26,7 +26,7 @@ tuple of arguments, the most specific method applicable to those arguments is ap
 overall behavior of a function is a patchwork of the behaviors of its various method definitions.
 If the patchwork is well designed, even though the implementations of the methods may be quite
 different, the outward behavior of the function will appear seamless and consistent.
---><p>同じ概念の異なる多くの実装を、円滑に利用するためには、関数すべてを一度に定義する必要はなくて、引数の型と個数の組み合わせごとに、特定の動作を指定して、区分的に定義できます。 こうした関数の、とるかもしれない１つの動作の定義は、<strong>メソッド</strong> と呼ばれます。 ここまでで例示した関数は、単一のメソッドで定義されたものだけで、すべての型の引数に適用可能です。 しかし、メソッド定義のシグネチャに、型注釈をつけると、引数の型と数を指定でき、複数のメソッド定義を与えることができます。 関数が特定の引数の組に適用されるとき、それらの引数に適用可能なものから最も特化したメソッドが適用されます。 したがって、関数の全体的な動作は、さまざまなメソッド定義の動作のパッチワークです。 パッチワークがうまく設計されていれば、メソッドの実装がかなり異なっていても、外側からは関数の動作は継ぎ目なく一貫しているように見えます。</p><!--
+--><p>同じ概念の異なる多くの実装を、円滑に利用するためには、関数を一度にすべて定義する必要はなく、引数の型と個数の組み合わせごとに、挙動を指定して、区分的に定義したほうがいいでしょう。 こうした関数の、とりうる挙動の定義のひとつひとつは、<strong>メソッド</strong> と呼ばれます。 今までに例示した関数は、単一のメソッドで定義された、引数に対してすべての型を適用可能な関数だけです。 しかし、メソッド定義のシグネチャに、引数の型と数を指定するために型注釈をつけることも可能で、 メソッドの定義も複数あっても構いません。 関数を具体的な引数の組に適用する場合、その引数に適用可能なものから最も特化したメソッドが適用されます。 つまり、関数全体の挙動は、さまざまなメソッドで定義された挙動のパッチワークです。 パッチワークがうまく設計されていれば、メソッドの実装が全く異なっていても、外側からの関数の挙動は継ぎ目なく一貫しているように見えます。</p><!--
 The choice of which method to execute when a function is applied is called *dispatch*. Julia allows
 the dispatch process to choose which of a function's methods to call based on the number of arguments
 given, and on the types of all of the function's arguments. This is different than traditional
@@ -40,7 +40,7 @@ the addition operation in `x + y` belong to `x` any more than it does to `y`? Th
 of a mathematical operator generally depends on the types of all of its arguments. Even beyond
 mathematical operations, however, multiple dispatch ends up being a powerful and convenient paradigm
 for structuring and organizing programs.
---><p>実行するメソッドを、関数が適用される際に選択することを、 <strong>ディスパッチ</strong> と呼ばれます。 Juliaでは、ディスパッチの過程で、関数のメソッドのどれを呼び出すか、関数のすべての引数の型と個数に基づいて、選択できます。 これは、従来のオブジェクト指向言語とは異なります。従来のオブジェクト指向言語では、通常は最初の引数のみに基づいてディスパッチが行われ、最初の引数を特別視して引数に見えないような構文を持つものもあります。</p><!--
+--><p>関数を適用する際に、実行するメソッドを選択することを、 <strong>ディスパッチ</strong> と呼びます。 Juliaでは、ディスパッチの過程で、関数のメソッドのどれを呼び出すか、関数のすべての引数の型と個数に基づいて、選択することができます。 これは、従来のオブジェクト指向言語とは異なります。従来のオブジェクト指向言語では、通常は最初の引数のみに基づいてディスパッチが行われ、最初の引数を特別視して引数に見えないような構文を持つものもあります。 [^ 1] 関数に対して、最初の引数だけではなく、すべての引数を利用して、呼び出すメソッドを選択することは、<a href="https://en.wikipedia.org/wiki/Multiple_dispatch">多重ディスパッチ</a>として知られています。 多重ディスパッチは特に数学的なコードで有用です。 演算が、他の引数よりもどの引数に、より「属している」かと不自然なことを考えても、意味がないからです。 <code>x + y</code> の式の中の足し算は、 <code>x</code> に <code>y</code>よりも属してると思いますか。 数学的な演算子の実装は、通常は、すべての引数の型に依存しています。 しかし、数学的な操作以外でも、多重ディスパッチは、プログラムを構築し組織化する強力で便利なパラダイムです。</p><!--
 [^1]:
     In C++ or Java, for example, in a method call like `obj.meth(arg1,arg2)`, the object obj "receives"
     the method call and is implicitly passed to the method via the `this` keyword, rather than as
@@ -48,7 +48,7 @@ for structuring and organizing programs.
     it can be omitted altogether, writing just `meth(arg1,arg2)`, with `this` implied as the receiving
     object.
 
---><p>[^ 1] 関数の、最初の引数だけではなく、すべての引数を使用して、呼び出すメソッドを選択することは、<a href="https://en.wikipedia.org/wiki/">多重ディスパッチ</a>として知られています。 多重ディスパッチは特に数学のコードで有用です。演算がどの引数に、より「属している」かと不自然なことを考えても、意味がないからです。<code>x + y</code> の式の中の足し算は、 <code>x</code> に <code>y</code>よりも属してると思いますか？ 数学的演算子の実装は、一般には、すべての引数の型に依存しています。 しかし、数学的な操作以外でも、多重ディスパッチは、プログラムの構築し組織化する強力で便利なパラダイムです。</p><p>`<a href="## Defining Methods"></a></p><h2><a class="nav-anchor" id="メソッドの定義-1" href="#メソッドの定義-1">メソッドの定義</a></h2><!--
+--><p>[^ 1]： 　　例えば、C ++やJavaでは、<code>obj.meth(arg1,arg2)</code>のようなメソッド呼びだしの時は、オブジェクトobjはメソッド呼び出しを「受け取　　り」、暗黙のうちに<code>this</code>キーワードを介して、引数だと明示せずに、メソッドに引き渡します。 　　<code>this</code>オブジェクトがメソッド呼び出しのレシーバである場合は省略できます。<code>meth(arg1,arg2)</code>と書くだけで、<code>this</code>は受け取るオ　　ブジェクトを暗に示します。</p><p>`<a href="## Defining Methods"></a></p><h2><a class="nav-anchor" id="メソッドの定義-1" href="#メソッドの定義-1">メソッドの定義</a></h2><!--
 Until now, we have, in our examples, defined only functions with a single method having unconstrained
 argument types. Such functions behave just like they would in traditional dynamically typed languages.
 Nevertheless, we have used multiple dispatch and methods almost continually without being aware
@@ -58,14 +58,14 @@ and count.
 
 When defining a function, one can optionally constrain the types of parameters it is applicable
 to, using the `::` type-assertion operator, introduced in the section on [Composite Types](@ref):
---><p>今までの例では、引数に型の制約がない、単一のメソッドしかない関数しか定義していませんでした。 そのような関数は、従来の動的型付け言語と同じように動作します。 にもかかわらず、私たちは知らない間に、ほぼ断続的に多重ディスパッチとメソッドを使用してきました。 前述の<code>+</code>関数のような、Juliaの標準的な関数と演算子はすべて、多くのメソッドを持ち、引数の型と個数のさまざまな組み合わせに対して動作が定義されています。</p><p>関数を定義するときには、必要に応じて、<a href="types.html#複合型-1">複合型</a>に関するセクションで紹介した<code>::</code>型表明演算子を使って、適用可能なパラメータの型を、制限することができます。</p><pre><code class="language-julia-repl">julia&gt; f(x::Float64, y::Float64) = 2x + y
+--><p>今までの例では、引数に型の制約がない、単一のメソッドしかない関数しか定義していませんでした。 そのような関数は、従来の動的型付け言語と同じように動作します。 にもかかわらず、私たちは知らない間に、ずっと多重ディスパッチとメソッドを使っていました。 前述の<code>+</code>関数のような、Juliaの標準的な関数と演算子はすべて、多くのメソッドを持ち、引数の型と個数のさまざまな組み合わせに対して動作が定義されています。</p><p>関数を定義するときには、必要に応じて、<a href="types.html#複合型-1">複合型</a>に関するセクションで紹介した<code>::</code>型注釈演算子を使って、適用可能なパラメータの型を、制限することができます。</p><pre><code class="language-julia-repl">julia&gt; f(x::Float64, y::Float64) = 2x + y
 f (generic function with 1 method)</code></pre><!--
 This function definition applies only to calls where `x` and `y` are both values of type
 [`Float64`](@ref):
---><p>関数を定義するときには、必要に応じて、<a href="types.html#複合型-1">複合型</a>に関するセクションで紹介した<code>::</code>型表明演算子を使って、適用可能なパラメータの型を、制限することができます。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3.0)
+--><p>この関数の定義は、<code>x</code>と<code>y</code>が共に<a href="../base/numbers.html#Core.Float64"><code>Float64</code></a>型の値のときだけ、適用されます。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3.0)
 7.0</code></pre><!--
 Applying it to any other types of arguments will result in a [`MethodError`](@ref):
---><p>この関数定義を他の型の引数に適用すると、次のような<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>になります。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3)
+--><p>この関数定義を他の型の引数に適用すると、次のような<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>が生じます。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3)
 ERROR: MethodError: no method matching f(::Float64, ::Int64)
 Closest candidates are:
   f(::Float64, !Matched::Float64) at none:1
@@ -88,7 +88,7 @@ to 64-bit floating-point, nor are strings parsed as numbers. Because `Float64` i
 type and concrete types cannot be subclassed in Julia, such a definition can only be applied
 to arguments that are exactly of type `Float64`. It may often be useful, however, to write
 more general methods where the declared parameter types are abstract:
---><p>これを見て分かるように、引数はちょうど<a href="../base/numbers.html#Core.Float64"><code>Float64</code></a>型でなければなりません。 他の整数や32ビット浮動小数点数などの数値型は、自動的に64ビット浮動小数点数に変換されず、文字列も数字として解析されません。 <code>Float64</code>は具象型で、具象型はJuliaでは、サブクラス化できないので、このような定義はちょうど型が<code>Float64</code>の引数のみに適用ができます。 しかし、宣言するパラメータの型が抽象的な、汎化メソッドを書くと、けっこう役に立つかもしれません。</p><pre><code class="language-julia-repl">julia&gt; f(x::Number, y::Number) = 2x - y
+--><p>ご覧のように、引数は正確に<a href="../base/numbers.html#Core.Float64"><code>Float64</code></a>型でなければなりません。 他の整数や32ビット浮動小数点数などの数値型では、自動的に64ビット浮動小数点数に変換されず、文字列も数字として解析されません。 <code>Float64</code>は具象型で、Juliaでは、7具象型はサブクラス化できないので、このような定義は、型が正確に<code>Float64</code>の引数のみに適用可能です。 しかし、宣言する引数の型が抽象的な、汎化メソッドを書くと、けっこう役に立つかもしれません。</p><pre><code class="language-julia-repl">julia&gt; f(x::Number, y::Number) = 2x - y
 f (generic function with 2 methods)
 
 julia&gt; f(2.0, 3)
@@ -97,7 +97,7 @@ This method definition applies to any pair of arguments that are instances of [`
 They need not be of the same type, so long as they are each numeric values. The problem of
 handling disparate numeric types is delegated to the arithmetic operations in the
 expression `2x - y`.
-
+--><p>このメソッド定義は<a href="../base/numbers.html#Core.Number"><code>Number</code></a>のインスタンスである任意の引数のペアに適用されます。 それらはそれぞれ数値である限り、同じ型である必要はありません。 異なる数値型を処理する問題は、式<code>2x - y</code>の算術演算に委譲されます。</p><!--
 To define a function with multiple methods, one simply defines the function multiple times, with
 different numbers and types of arguments. The first method definition for a function creates the
 function object, and subsequent method definitions add new methods to the existing function object.
@@ -107,7 +107,7 @@ behavior for `f` over all pairs of instances of the abstract type `Number` -- bu
 behavior specific to pairs of [`Float64`](@ref) values. If one of the arguments is a 64-bit
 float but the other one is not, then the `f(Float64,Float64)` method cannot be called and
 the more general `f(Number,Number)` method must be used:
---><p>このメソッド定義は<a href="../base/numbers.html#Core.Number"><code>Number</code></a>のインスタンスである任意の引数のペアに適用されます。 それらがそれぞれ数値である限り、同じ型である必要はありません。 異なる数値型を処理する問題は、式<code>2x - y</code>の算術演算に委譲されます。</p><p>複数のメソッドを持つ関数を定義するには、単に複数回の関数の定義を、数と型の異なる引数に対して、行うだけです。 最初のメソッド定義では、関数オブジェクトを作成され、次回以降のメソッド定義では、既存の関数オブジェクトに新しいメソッドが追加されます。 関数の適用時に、引数の数と型が最も一致するメソッド定義が実行されます。 したがって、上の2つのメソッド定義が一緒になって、抽象型<code>Number</code>のインスタンスのペアすべてに対して<code>f</code>の動作を定義しますが、値<a href="../base/numbers.html#Core.Float64"><code>Float64</code></a>のペアに固有の動作は異なります。 引数の1つが64ビット浮動小数点数で、もう1つがそうでない場合、この<code>f(Float64,Float64)</code>メソッドは呼び出すことができず、より一般的な<code>f(Number,Number)</code>メソッドを使用する必要があります。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3.0)
+--><p>複数のメソッドを持つ関数を定義するには、単に関数の定義を、数と型の異なる引数に対して、複数回行うだけです。 最初のメソッド定義では、関数オブジェクトが生成し、次回以降のメソッド定義では、既存の関数オブジェクトに新しいメソッドが追加されます。 関数の適用時には、引数の数と型が一致している最も特化したメソッド定義が実行されます。 このように、上記の2つのメソッド定義が一緒になって、抽象型<code>Number</code>のインスタンスの組すべてに対する<code>f</code>の挙動を定義しますが、 共に<a href="../base/numbers.html#Core.Float64"><code>Float64</code></a>の値の組の場合は挙動が異なります。 引数の一方が64ビット浮動小数点数で、他方が違う場合、この<code>f(Float64,Float64)</code>メソッドは呼び出し不可能で、より一般的な<code>f(Number,Number)</code>メソッドを使う必要があります。</p><pre><code class="language-julia-repl">julia&gt; f(2.0, 3.0)
 7.0
 
 julia&gt; f(2, 3.0)
@@ -126,7 +126,7 @@ from magic. [^Clarke61]
 
 For non-numeric values, and for fewer or more than two arguments, the function `f` remains undefined,
 and applying it will still result in a [`MethodError`](@ref):
---><p><code>2x + y</code>という定義は、最初の場合にだけ使われていますが、<code>2x - y</code>という定義が、その他では使われています。 関数の引数の自動キャストや変換は一度も実行されません。 Juliaでは、すべての変換は魔法ではなく完全に明示的です。 しかし、[Conversion and Promotion]（@ ref conversion-and-promotion）では、十分に高度な技術をうまく使うと、魔法と区別できないほどになることを示しています。[^ Clarke61]</p><p>数値以外の値や2つ以上の引数の場合、関数<code>f</code>は未定義のままであり、そのまま適用すると次のように<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>がおこります。</p><pre><code class="language-julia-repl">julia&gt; f(&quot;foo&quot;, 3)
+--><p><code>2x + y</code>という定義は、最初の場合にだけ使われていますが、<code>2x - y</code>という定義が、その他では使われています。 関数の引数の自動キャストや変換は一度も実行されません。 Juliaでは、すべての変換は魔法ではなく完全に明示的です。 しかし、[変換と昇格]（@ ref conversion-and-promotion）では、十分に高度な技術をうまく使うと、魔法と区別できなくなることを示しています。[^ Clarke61]</p><p>数値以外の値や引数の数が２より大きかったり小さかったりする場合、関数<code>f</code>は未定義のままであり、そのまま適用すると次のように<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>が生じます。</p><pre><code class="language-julia-repl">julia&gt; f(&quot;foo&quot;, 3)
 ERROR: MethodError: no method matching f(::String, ::Int64)
 Closest candidates are:
   f(!Matched::Number, ::Number) at none:1
@@ -153,7 +153,7 @@ these methods were defined at the REPL, we get the apparent line number `none:1`
 In the absence of a type declaration with `::`, the type of a method parameter is `Any` by default,
 meaning that it is unconstrained since all values in Julia are instances of the abstract type
 `Any`. Thus, we can define a catch-all method for `f` like so:
---><p>すると表示されるのは、<code>f</code>が二つのメソッドを持っていて、一方は2つの<code>Float64</code>の引数を取り、他方は型が<code>Number</code>の引数を取ることです。 また、メソッドが定義されたファイルと行番号も表示されます。 これらのメソッドはREPLで定義されているため、見かけの行番号<code>none:1</code>が表示されます。</p><p><code>::</code>による型宣言がない場合、メソッドのパラメータの型はデフォルトでは<code>Any</code>であり、Juliaのすべての値が抽象型<code>Any</code>のインスタンスであるため、制約がないことを意味しています 。 したがって、<code>f</code>の全捕捉メソッドを以下のように定義することができます。</p><pre><code class="language-julia-repl">julia&gt; f(x,y) = println(&quot;Whoa there, Nelly.&quot;)
+--><p>すると、<code>f</code>には二つのメソッドがあり、一方は2つの<code>Float64</code>の引数を取り、他方は型が<code>Number</code>の引数を取ることが表示されます。 また、メソッドの定義されたファイルと行番号も表示されます。 これらのメソッドはREPLで定義されているため、見かけの行番号<code>none:1</code>が表示されます。</p><p><code>::</code>による型宣言がない場合、メソッドの引数の型はデフォルトでは<code>Any</code>です。 これは、Juliaのすべての値が抽象型<code>Any</code>のインスタンスなので、制約がないことを意味しています 。 したがって、<code>f</code>を全捕捉するメソッドを以下のように定義することができます。</p><pre><code class="language-julia-repl">julia&gt; f(x,y) = println(&quot;Whoa there, Nelly.&quot;)
 f (generic function with 3 methods)
 
 julia&gt; f(&quot;foo&quot;, 1)
@@ -164,7 +164,7 @@ values, so it will only be called on pairs of arguments to which no other method
 Although it seems a simple concept, multiple dispatch on the types of values is perhaps the single
 most powerful and central feature of the Julia language. Core operations typically have dozens
 of methods:
---><p>この全捕捉は、どの引数のペアに対する他のメソッド定義よりも特化していないため、他のメソッド定義が適用されない引数のペアに対してのみ呼び出されます。</p><p>単純な考え方のように見えますが、値型に対する多重ディスパッチは、おそらくJulia言語の最も強力で中心的な機能です。中心となる演算には通常数十種類のメソッドがあります。</p><pre><code class="language-julia-repl">julia&gt; methods(+)
+--><p>この全捕捉は、引数の組に対して他のどのメソッド定義よりも特化していないため、他のメソッド定義が適用されない引数の組に対してのみ呼び出されます。</p><p>単純な考え方のように見えますが、値型に対する多重ディスパッチは、おそらくJulia言語の最も強力で中心的な単一の機能です。中核の演算には通常数十種類のメソッドがあります。</p><pre><code class="language-julia-repl">julia&gt; methods(+)
 # 180 methods for generic function &quot;+&quot;:
 [1] +(x::Bool, z::Complex{Bool}) in Base at complex.jl:227
 [2] +(x::Bool, y::Bool) in Base at bool.jl:89
@@ -188,10 +188,10 @@ of methods:
 Multiple dispatch together with the flexible parametric type system give Julia its ability to
 abstractly express high-level algorithms decoupled from implementation details, yet generate efficient,
 specialized code to handle each case at run time.
---><p>多重ディスパッチと柔軟なパラメトリック型システムによって、Juliaに与えられた能力は、高水準のアルゴリズムを抽象的に表現して、実装の詳細から切り離し、実行時に各ケースに特化して処理する効率的なコードを生成することです。</p><p>`<a href="## [Method Ambiguities](@id man-ambiguities)"></a></p><h2><a class="nav-anchor" id="man-ambiguities-1" href="#man-ambiguities-1">メソッドの曖昧さ</a></h2><!--
+--><p>多重ディスパッチと柔軟なパラメータ化可能な型システムによって、高水準のアルゴリズムを抽象的に表現し、実装の詳細から切り離し、実行時に各条件に特化して処理する効率的なコードを生成することが、Juliaでは可能になったのです。</p><p>`<a href="## [Method Ambiguities](@id man-ambiguities)"></a></p><h2><a class="nav-anchor" id="man-ambiguities-1" href="#man-ambiguities-1">メソッドの曖昧さ</a></h2><!--
 It is possible to define a set of function methods such that there is no unique most specific
 method applicable to some combinations of arguments:
---><p>ある種の引数の組み合わせに対しては、最も特化するメソッドが一意に定まらない、関数メソッドの組み合わせに、定義がなってしまう可能性があります。</p><pre><code class="language-julia-repl">julia&gt; g(x::Float64, y) = 2x + y
+--><p>複数の関数メソッドに対する定義によっては、ある種の引数の組み合わせに対しては、 最も特化するメソッドが一意に定まらないこともありえます。</p><pre><code class="language-julia-repl">julia&gt; g(x::Float64, y) = 2x + y
 g (generic function with 1 method)
 
 julia&gt; g(x, y::Float64) = x + 2y
@@ -213,7 +213,7 @@ Here the call `g(2.0, 3.0)` could be handled by either the `g(Float64, Any)` or 
 method, and neither is more specific than the other. In such cases, Julia raises a [`MethodError`](@ref)
 rather than arbitrarily picking a method. You can avoid method ambiguities by specifying an appropriate
 method for the intersection case:
---><p>ここでの関数呼び出し<code>g(2.0, 3.0)</code>は、<code>g(Float64, Any)</code>と<code>g(Any, Float64)</code> のメソッドによって処理可能ですが、どちらがより特化しているかは決められません。 このような場合、Juliaは勝手にメソッドを選択せずに、<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>を発生させます。  共通する場合に特化したメソッドを指定することで、メソッドの曖昧さをなくすことができます。</p><pre><code class="language-julia-repl">julia&gt; g(x::Float64, y::Float64) = 2x + 2y
+--><p>ここでの関数呼び出し<code>g(2.0, 3.0)</code>は、<code>g(Float64, Any)</code>と<code>g(Any, Float64)</code> のメソッドによって処理可能ですが、どちらがより特化しているかは決められません。 このような場合、Juliaは勝手にメソッドを選択せずに、<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a>を発生します。  共通する場合に特化したメソッドを指定することで、メソッドの曖昧さをなくすことができます。</p><pre><code class="language-julia-repl">julia&gt; g(x::Float64, y::Float64) = 2x + 2y
 g (generic function with 3 methods)
 
 julia&gt; g(2.0, 3)
@@ -229,9 +229,9 @@ exists, if transiently, until the more specific method is defined.
 
 In more complex cases, resolving method ambiguities involves a certain
 element of design; this topic is explored further [below](@ref man-method-design-ambiguities).
---><p>曖昧さのないメソッドを最初に定義することが推奨されます。というのも、一時的にせよ、より特化したメソッドが定義されるまで、曖昧さが残るからです。</p><p>より複雑なケースでは、メソッドの曖昧さを解決するには一定の設計要素が必要になります。この話題は[below]（@ ref man-method-design-ambiguities）をさらに詳しく解説しています。</p><p>`<a href="## Parametric Methods"></a></p><h2><a class="nav-anchor" id="パラメータメソッド-1" href="#パラメータメソッド-1">パラメータメソッド</a></h2><!--
+--><p>曖昧さのないメソッドは最初に定義することをお勧めします。でなければ、一時的にせよ、より特化したメソッドが定義されるまで、曖昧さが残るからです。</p><p>より複雑なケースでは、メソッドの曖昧さを解決するにはある種の設計要素が必要になります。この話題は[以下で]（@ ref man-method-design-ambiguities）さらに詳しく解説しています。</p><p>`<a href="## Parametric Methods"></a></p><h2><a class="nav-anchor" id="パラメータメソッド-1" href="#パラメータメソッド-1">パラメータメソッド</a></h2><!--
 Method definitions can optionally have type parameters qualifying the signature:
---><p>メソッド定義で、任意で型パラメータをつけて、シグネチャを細かく指定することができます。</p><pre><code class="language-julia-repl">julia&gt; same_type(x::T, y::T) where {T} = true
+--><p>メソッド定義では、必要に応じて型パラメータを使い、シグネチャを細かく指定することができます。</p><pre><code class="language-julia-repl">julia&gt; same_type(x::T, y::T) where {T} = true
 same_type (generic function with 1 method)
 
 julia&gt; same_type(x,y) = false
@@ -240,7 +240,7 @@ The first method applies whenever both arguments are of the same concrete type, 
 what type that is, while the second method acts as a catch-all, covering all other cases. Thus,
 overall, this defines a boolean function that checks whether its two arguments are of the same
 type:
---><p>第1のメソッドは、両方の引数が同じ具象型であれば、どんな型であれ適用されます。第2のメソッドは他のすべての場合に渡る全捕捉として働きます。 したがって、これは全体として、2つの引数が同じ型であるかどうかを検査するブール関数の定義になっています。</p><pre><code class="language-julia-repl">julia&gt; same_type(1, 2)
+--><p>第1のメソッドは、両方の引数が同じ具象型であれば、どんな型であっても適用できます。 第2のメソッドは他のすべての場合に対する全捕捉として作用します。 結局これは、2つの引数が同じ型であるかどうかを検査するブール関数を定義しています。</p><pre><code class="language-julia-repl">julia&gt; same_type(1, 2)
 true
 
 julia&gt; same_type(1, 2.0)
@@ -265,7 +265,7 @@ in Julia. Method type parameters are not restricted to being used as the types o
 they can be used anywhere a value would be in the signature of the function or body of the function.
 Here's an example where the method type parameter `T` is used as the type parameter to the parametric
 type `Vector{T}` in the method signature:
---><p>そのような定義はシグネチャがUnionAll型であるメソッドに対応します(<a href="types.html#全合併型-1">全合併型</a> 参照)。</p><p>Juliaでは、このようにディスパッチを使って関数の動作を定義するのは、まったく普通であって、慣用的でさえあります。メソッドの型パラメータは、引数の型として使えるだけでなく、関数の本体または関数のシグネチャの、値がある場所であればどこでも使えます。メソッドの型パラメータ<code>T</code>が、メソッドのシグネチャのパラメトリック型に対する型パラメータ<code>Vector{T}</code>として使用される例を次に示します。</p><pre><code class="language-julia-repl">julia&gt; myappend(v::Vector{T}, x::T) where {T} = [v..., x]
+--><p>このような定義はシグネチャが<code>UnionAll</code>型であるメソッドに対応します(<a href="types.html#全合併型-1">全合併型</a> 参照)。</p><p>このようにディスパッチを使って関数の動作を定義することは、Juliaでは、まったく普通で、慣用的でさえあります。 メソッドの型パラメータは、引数の型に対する利用に制限されているわけではなく、 関数本体や関数のシグネチャなど、値がある場所であればどこでも利用できます。 メソッドの型パラメータ<code>T</code>が、メソッドのシグネチャの中で、パラメータ型<code>Vector{T}</code>に対する型パラメータとして利用される例を示します。</p><pre><code class="language-julia-repl">julia&gt; myappend(v::Vector{T}, x::T) where {T} = [v..., x]
 myappend (generic function with 1 method)
 
 julia&gt; myappend([1,2,3],4)
@@ -294,7 +294,7 @@ Closest candidates are:
 As you can see, the type of the appended element must match the element type of the vector it
 is appended to, or else a [`MethodError`](@ref) is raised. In the following example, the method type parameter
 `T` is used as the return value:
---><p>ご覧のように、追加する要素の型は、追加されるベクトルの要素の型と一致しなければなりません。でなければ、<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a> が生成されます。 次の例では、メソッドの型パラメータ <code>T</code>が戻り値として使用されています。</p><pre><code class="language-julia-repl">julia&gt; mytypeof(x::T) where {T} = T
+--><p>ご覧のように、追加する要素の型は、追加されるベクトルの要素の型と一致しなければなりません。でなければ、<a href="../base/base.html#Core.MethodError"><code>MethodError</code></a> が生じます。 次の例では、メソッドの型パラメータ <code>T</code>が戻り値として使用されています。</p><pre><code class="language-julia-repl">julia&gt; mytypeof(x::T) where {T} = T
 mytypeof (generic function with 1 method)
 
 julia&gt; mytypeof(1)
@@ -304,7 +304,7 @@ julia&gt; mytypeof(1.0)
 Float64</code></pre><!--
 Just as you can put subtype constraints on type parameters in type declarations (see [Parametric Types](@ref)),
 you can also constrain type parameters of methods:
---><p>型宣言（<a href="manual/@ref">パラメトリック型</a>型を参照）に出てくる型パラメータにサブタイプ制約を付加できるのと同様に、メソッドの型パラメータも制約することができます。</p><pre><code class="language-julia-repl">julia&gt; same_type_numeric(x::T, y::T) where {T&lt;:Number} = true
+--><p>型宣言（<a href="types.html#パラメータ型-1">パラメータ型</a>型を参照）に出てくる型パラメータにサブタイプ制約をかけることができるのと同様に、メソッドの型パラメータにも制約をかけることができます。</p><pre><code class="language-julia-repl">julia&gt; same_type_numeric(x::T, y::T) where {T&lt;:Number} = true
 same_type_numeric (generic function with 1 method)
 
 julia&gt; same_type_numeric(x::Number, y::Number) = false
@@ -339,7 +339,7 @@ If there is only a single parameter, the enclosing curly braces (in `where {T}`)
 but are often preferred for clarity.
 Multiple parameters can be separated with commas, e.g. `where {T, S<:Real}`, or written using
 nested `where`, e.g. `where S<:Real where T`.
---><p>この<code>same_type_numeric</code>関数は、以前に定義した関数<code>same_type</code>と非常によく似た動作をしますが、数値の組に対してのみ定義されています。</p><p>パラメトリックメソッドでは、型の作成に使用される<code>where</code>式と同じ構文を使用できます（<a href="types.html#全合併型-1">全合併型</a>を参照）。パラメータが1つしかない場合は、中括弧（<code>where {T}</code>）を省略することができますが、わかりやくするために、よく好んでつけられます。複数のパラメータは、例えば、カンマで区切ったり(例<code>where {T, S&lt;:Real}</code>)、またはネストされた<code>where</code>を使ったりして記述されます。（例<code>where S&lt;:Real where T</code>）</p><!--
+--><p>この<code>same_type_numeric</code>関数は、以前に定義した関数<code>same_type</code>と非常によく似た挙動をしますが、数値の組に対してのみ定義されています。</p><p>パラメータメソッドでは、型の生成に使われる<code>where</code>式と同じ構文を使って型を書くことが可能です（<a href="types.html#全合併型-1">全合併型</a>を参照）。 パラメータが1つしかない場合は、中括弧（<code>where {T}</code>）を省略することができますが、わかりやくするために、好んでよく使われます。 複数のパラメータは、カンマで区切ったり(例<code>where {T, S&lt;:Real}</code>)、<code>where</code>をネストしたり（例<code>where S&lt;:Real where T</code>）して記述します。</p><!--
 Redefining Methods
 ------------------
 --><h2><a class="nav-anchor" id="メソッドの再定義-1" href="#メソッドの再定義-1">メソッドの再定義</a></h2><!--
@@ -350,7 +350,7 @@ without the usual JIT tricks and overhead.
 Indeed, any new method definition won't be visible to the current runtime environment,
 including Tasks and Threads (and any previously defined `@generated` functions).
 Let's start with an example to see what this means:
---><p>メソッドの再定義や、新しいメソッドの追加は、その変更が即座に反映されない、という認識は重要です。 これは、Juliaが静的にコードを推論しコンパイルする際に、通常のJITトリックやオーバーヘッドがなくてすむ鍵となります。 実際、新しいメソッド定義は、タスクおよびスレッド（およびそれ以前に定義された@generated関数）を含め、現在の実行時環境ではまったく見えません。 これが何を意味するかを例をあげて見てみましょう。</p><pre><code class="language-julia-repl">julia&gt; function tryeval()
+--><p>メソッドを再定義したり、新しく追加したりする時は、変更がすぐには反映されない、ということを理解しておくことが重要です。 これは、静的にコードを推論・コンパイルし、よくあるJITトリックやオーバーヘッドなしで実行速度が速い、というJuliaの能力の鍵となります。 実際、新しいメソッド定義は、実行時環境からは、タスクおよびスレッド（そして以前に定義された<code>@generated</code>関数）を含め、まったく見えません。 これが何を意味するかを例をあげて見てみましょう。</p><pre><code class="language-julia-repl">julia&gt; function tryeval()
            @eval newfun() = 1
            newfun()
        end
@@ -372,7 +372,7 @@ The new global is immediately visible to the `tryeval` function,
 so you could write `return newfun` (without parentheses).
 But neither you, nor any of your callers, nor the functions they call, or etc.
 can call this new method definition!
---><p>メソッドの再定義や、新しいメソッドの追加は、その変更が即座に反映されない、という認識は重要です。 これは、Juliaが静的にコードを推論しコンパイルする際に、通常のJITトリックやオーバーヘッドがなくてすむ鍵となります。 実際、新しいメソッド定義は、タスクおよびスレッド（およびそれ以前に定義された@generated関数）を含め、現在の実行時環境ではまったく見えません。 これが何を意味するかを例をあげて見てみましょう。</p><!--
+--><p>この例では、<code>newfun</code>の新しい定義は作成されましたが、すぐには呼び出せないことに注意してください。 この新しいグローバルな関数はすぐに<code>tryeval</code>関数からは見えるので、<code>return newfun</code>と(括弧を付けずに）書くことができます。 しかし、あなたも、呼ぶ関数からも、呼ばれる関数からも、この新しいメソッド定義を呼び出すことはできません！</p><!--
 But there's an exception: future calls to `newfun` *from the REPL* work as expected,
 being able to both see and call the new definition of `newfun`.
 
@@ -380,7 +380,7 @@ However, future calls to `tryeval` will continue to see the definition of `newfu
 *at the previous statement at the REPL*, and thus before that call to `tryeval`.
 
 You may want to try this for yourself to see how it works.
---><p>しかし、例外はあります。<code>newfun</code>への <strong>REPLからの</strong>今後の呼び出しは、期待通りに動作し、<code>newfun</code>の新しい定義を参照して呼び出すことができます。</p><p>しかし、<code>tryeval</code>への今後の呼び出しが、参照し続ける<code>newfun</code>の定義は、次回<code>tryeval</code>を呼び出すまでは<strong>REPLで前回行った</strong>ものです。前回の<code>tryeval</code>の呼び出しも同様だったのです。</p><p>これがどのように動作するかを見るために自身で試してみたいと思うかもしれません。</p><!--
+--><p>しかし、例外はあります。<strong>REPLからの</strong> <code>newfun</code>への今後行うの呼び出しは、期待通りに動作し、<code>newfun</code>の新しい定義を参照して呼び出すことができます。</p><p>しかし、<code>tryeval</code>への今後行う呼び出しは、<strong>REPLで前回行った</strong> <code>newfun</code>の定義を参照し続けます。これは前回の<code>tryeval</code>の呼び出しも同じです。</p><p>これを自分で試して、どのように動作するかを見てみたいと思うかもしれません。</p><!--
 The implementation of this behavior is a "world age counter".
 This monotonically increasing value tracks each method definition operation.
 This allows describing "the set of method definitions visible to a given runtime environment"
@@ -391,7 +391,7 @@ is one greater than the task-local "runtime world" that was fixed when the execu
 
 Sometimes it is necessary to get around this (for example, if you are implementing the above REPL).
 Fortunately, there is an easy solution: call the function using [`Base.invokelatest`](@ref):
---><p>この行動の実装は「世界の世代のカウンター」です。 この単調に増加する値は、各メソッド定義の操作を追跡します。 これにより、「実行時環境から見えるメソッド定義の集合」を、単一の数値「世界世代」として記述することができます。 また、世代を比較するだけで、2つの世界で利用できるメソッドを比較することもできます。 上記の例では、メソッド<code>newfun()</code>が存在する「現在の世界」が、<code>tryeval</code>開始時に設定されたタスクローカルの「実行時の世界」よりも１つ大きいことがわかります。</p><p>場合によってはこれを回避する必要があります（たとえば、上記のREPLを実装している場合など）。 幸いにも、簡単な解決策があって、<a href="../base/base.html#Base.invokelatest"><code>Base.invokelatest</code></a>を使って関数を呼び出せば、いいのです。</p><pre><code class="language-julia-repl">julia&gt; function tryeval2()
+--><p>この挙動の実装は「世界の年齢のカウンター」です。 この単調に増加する値は、各メソッド定義の操作を追跡します。 これにより、「実行時環境から見えるメソッド定義の集合」を、単一の数値「世界の年齢」として記述することができます。 また、年齢を比較するだけで、2つの世界で利用できるメソッドを比較することもできます。 上記の例では、メソッド<code>newfun()</code>が存在する「現在の世界」が、<code>tryeval</code>開始時に設定されたタスクローカルの「実行時の世界」よりも１つ大きいことがわかります。</p><p>場合によってはこれを回避する必要があります（たとえば、上記のREPLを実装している場合など）。 幸いにも、簡単な解決策があって、<a href="../base/base.html#Base.invokelatest"><code>Base.invokelatest</code></a>を使って関数を呼び出せば、いいのです。</p><pre><code class="language-julia-repl">julia&gt; function tryeval2()
            @eval newfun2() = 2
            Base.invokelatest(newfun2)
        end
@@ -431,10 +431,10 @@ julia&gt; fetch(schedule(t, 1))
 While complex dispatch logic is not required for performance or usability,
 sometimes it can be the best way to express some algorithm.
 Here are a few common design patterns that come up sometimes when using dispatch in this way.
---><p>`<a href="### Extracting the type parameter from a super-type"></a></p><h3><a class="nav-anchor" id="スーパータイプからの型パラメータの抽出-1" href="#スーパータイプからの型パラメータの抽出-1">スーパータイプからの型パラメータの抽出</a></h3><!--
+--><p>複雑なディスパッチの論理は、パフォーマンスや利便性のためには、必要ありませんが、 ある種のアルゴリズムを表現するための最善の方法となることがあります。 そのような用途によく使われるデザインパターンを挙げていきます。</p><p>`<a href="### Extracting the type parameter from a super-type"></a></p><h3><a class="nav-anchor" id="スーパータイプからの型パラメータの抽出-1" href="#スーパータイプからの型パラメータの抽出-1">スーパータイプからの型パラメータの抽出</a></h3><!--
 Here is the correct code template for returning the element-type `T`
 of any arbitrary subtype of `AbstractArray`:
---><pre><code class="language-julia">abstract type AbstractArray{T, N} end
+--><p>ここに挙げるのは、<code>AbstractArray</code>の任意のサブタイプの要素の型<code>T</code>を返す正しいコードのテンプレートです。</p><pre><code class="language-julia">abstract type AbstractArray{T, N} end
 eltype(::Type{&lt;:AbstractArray{T}}) where {T} = T</code></pre><!--
 using so-called triangular dispatch.  Note that if `T` is a `UnionAll`
 type, as e.g. `eltype(Array{T} where T <: Integer)`, then `Any` is
@@ -442,22 +442,26 @@ returned (as does the the version of `eltype` in `Base`).
 
 Another way, which used to be the only correct way before the advent of
 triangular dispatch in Julia v0.6, is:
---><pre><code class="language-julia">abstract type AbstractArray{T, N} end
+--><p>いわゆる三角ディスパッチを使います。 <code>T</code>が例えば<code>eltype(Array{T} where T &lt;: Integer)</code>のような<code>全合併型</code>のときには、 <code>Any</code>が返される点に注意してください。（<code>Base</code>の中の<code>eltype</code>の変形版のような働きをします）</p><p>別の方法で、Julia v0.6で三角ディスパッチが使えるようになる以前の唯一正しい方法は、</p><pre><code class="language-julia">abstract type AbstractArray{T, N} end
 eltype(::Type{AbstractArray}) = Any
 eltype(::Type{AbstractArray{T}}) where {T} = T
 eltype(::Type{AbstractArray{T, N}}) where {T, N} = T
-eltype(::Type{A}) where {A&lt;:AbstractArray} = eltype(supertype(A))</code></pre><p>Another possibility is the following, which could useful to adapt to cases where the parameter <code>T</code> would need to be matched more narrowly:</p><pre><code class="language-julia">eltype(::Type{AbstractArray{T, N} where {T&lt;:S, N&lt;:M}}) where {M, S} = Any
+eltype(::Type{A}) where {A&lt;:AbstractArray} = eltype(supertype(A))</code></pre><!--
+Another possibility is the following, which could useful to adapt
+to cases where the parameter `T` would need to be matched more
+narrowly:
+--><p>下記のような方法も可能で、パラメータ<code>T</code>の一致する範囲をもっと狭める必要がある時に 役立ちます。</p><pre><code class="language-julia">eltype(::Type{AbstractArray{T, N} where {T&lt;:S, N&lt;:M}}) where {M, S} = Any
 eltype(::Type{AbstractArray{T, N} where {T&lt;:S}}) where {N, S} = Any
 eltype(::Type{AbstractArray{T, N} where {N&lt;:M}}) where {M, T} = T
 eltype(::Type{AbstractArray{T, N}}) where {T, N} = T
 eltype(::Type{A}) where {A &lt;: AbstractArray} = eltype(supertype(A))</code></pre><!--
 One common mistake is to try and get the element-type by using introspection:
---><pre><code class="language-julia">eltype_wrong(::Type{A}) where {A&lt;:AbstractArray} = A.parameters[1]</code></pre><!--
+--><p>よくある間違いとして、イントロスペクション（実行時にオブジェクトの情報を参照・変更すること）を使って要素の型を 得ることです。</p><pre><code class="language-julia">eltype_wrong(::Type{A}) where {A&lt;:AbstractArray} = A.parameters[1]</code></pre><!--
 However, it is not hard to construct cases where this will fail:
---><pre><code class="language-julia">struct BitVector &lt;: AbstractArray{Bool, 1}; end</code></pre><!--
+--><p>しかし、これが失敗する場合を実現するのは難しくありません。</p><pre><code class="language-julia">struct BitVector &lt;: AbstractArray{Bool, 1}; end</code></pre><!--
 Here we have created a type `BitVector` which has no parameters,
 but where the element-type is still fully specified, with `T` equal to `Bool`!
---><p>`<a href="### Building a similar type with a different type parameter"></a></p><h3><a class="nav-anchor" id="別の型パラメータに似た型の構成-1" href="#別の型パラメータに似た型の構成-1">別の型パラメータに似た型の構成</a></h3><!--
+--><p>ここでは、パラメータを持たない<code>BitVector</code>を生成しましたが、 <code>T</code>を<code>Bool</code>と同等にすると、要素の型を完全に指定することができます。</p><p>`<a href="### Building a similar type with a different type parameter"></a></p><h3><a class="nav-anchor" id="別の型パラメータに似た型の構成-1" href="#別の型パラメータに似た型の構成-1">別の型パラメータに似た型の構成</a></h3><!--
 When building generic code, there is often a need for constructing a similar
 object with some change made to the layout of the type, also
 necessitating a change of the type parameters.
@@ -466,7 +470,7 @@ and want to write your computation on it with a specific element type.
 We must implement a method for each `AbstractArray{T}` subtype that describes how to compute this type transform.
 There is no general transform of one subtype into another subtype with a different parameter.
 (Quick review: do you see why this is?)
---><!--
+--><p>汎化的なコードを作る際に、型の構成を少し変えたオブジェクトを構成する必要が生じて、 型パラメータも変更する必要が出てくる、といったことがよく起こります。 例えば、要素の型が任意のある種の抽象型の配列を作り、これを使って特定の要素の型に対する計算を書きたいとします。 この時実装すべき<code>AbstractArray{T}</code>のサブタイプに対するメソッドには、型の変換をどのように計算するか記述しなければなりません。 パラメータの違うサブタイプどうしに対する一般的な変換はありません。 (おさらい：どうしてだかわかりますか)</p><!--
 The subtypes of `AbstractArray` typically implement two methods to
 achieve this:
 A method to convert the input array to a subtype of a specific `AbstractArray{T, N}` abstract type;
@@ -474,14 +478,14 @@ and a method to make a new uninitialized array with a specific element type.
 Sample implementations of these can be found in Julia Base.
 Here is a basic example usage of them, guaranteeing that `input` and
 `output` are of the same type:
---><pre><code class="language-julia">input = convert(AbstractArray{Eltype}, input)
+--><p>これを達成するには、通常<code>AbstractArray</code>のサブタイプに２つのメソッドを実装します。 入力の配列を特定の抽象型<code>AbstractArray{T, N}</code> のサブタイプに変換するメソッドと、 特定の要素型の初期化されていない配列を作るメソッドです。 例となる実装が、JuliaのBaseライブラリにあります。 これを使った、<code>input</code>と<code>output</code>が同じ型になることを保証する基本的な例を挙げます。</p><pre><code class="language-julia">input = convert(AbstractArray{Eltype}, input)
 output = similar(input, Eltype)</code></pre><!--
 As an extension of this, in cases where the algorithm needs a copy of
 the input array,
 [`convert`](@ref) is insufficient as the return value may alias the original input.
 Combining [`similar`](@ref) (to make the output array) and [`copyto!`](@ref) (to fill it with the input data)
 is a generic way to express the requirement for a mutable copy of the input argument:
---><pre><code class="language-julia">copy_with_eltype(input, Eltype) = copyto!(similar(input, Eltype), input)</code></pre><p>`<a href="### Iterated dispatch"></a></p><h3><a class="nav-anchor" id="ディスパッチの反復-1" href="#ディスパッチの反復-1">ディスパッチの反復</a></h3><!--
+--><p>この拡張に、入力の配列のコピーが必要なアルゴリズムを使う場合、 もとの入力のエイリアスを戻り値として使うには、<a href="../base/base.html#Base.convert"><code>convert</code></a>だけでは不十分です。  <a href="../base/arrays.html#Base.similar"><code>similar</code></a> (出力用の配列を生成する)と<a href="../base/c.html#Base.copyto!"><code>copyto!</code></a>（それを入力データで埋める）を組み合わせるのが、  入力の引数の可変なコピーを必要がとする場合の汎化的な表現法です。</p><pre><code class="language-julia">copy_with_eltype(input, Eltype) = copyto!(similar(input, Eltype), input)</code></pre><p>`<a href="### Iterated dispatch"></a></p><h3><a class="nav-anchor" id="ディスパッチの反復-1" href="#ディスパッチの反復-1">ディスパッチの反復</a></h3><!--
 In order to dispatch a multi-level parametric argument list,
 often it is best to separate each level of dispatch into distinct functions.
 This may sound similar in approach to single-dispatch, but as we shall see below, it is still more flexible.
@@ -492,7 +496,7 @@ then recurse down to a more specific method based on eltype.
 In most cases, the algorithms lend themselves conveniently to this hierarchical approach,
 while in other cases, this rigor must be resolved manually.
 This dispatching branching can be observed, for example, in the logic to sum two matrices:
---><pre><code class="language-julia"># First dispatch selects the map algorithm for element-wise summation.
+--><p>様々なレベルのパラメータ引数のリストをディスパッチするには、 それぞれのディスパッチのレベルを別の関数に分離するのが最善策で有ることがよくあります。 これは、単一のディスパッチ方式と似ているように聞こえるかもしれませんが、以下に示すように、より柔軟です。</p><p>例えば、配列の要素の型によるディスパッチを行なおうとすると、曖昧な状態に陥ることがよくあります。 この代わりに、まずコンテナの型によるディスパッチを行い、次に再帰的に要素型に対してメソッドを特化させます。 大抵の場合、アルゴリズムはこの階層的な方式を便利に利用するでしょうが、手動で厳密に解決しなければならないこともあるでしょう。 こうしたディスパッチの分岐は、２つの行列の和をおこなう場合などで見られます。</p><pre><code class="language-julia"># First dispatch selects the map algorithm for element-wise summation.
 +(a::Matrix, b::Matrix) = map(+, a, b)
 # Then dispatch handles each element and selects the appropriate
 # common element type for the computation.
@@ -509,7 +513,7 @@ altered after creation.
 However, such an extensible set can be programmed with a design pattern
 often referred to as a
 ["Holy-trait"](https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633).
---><!--
+--><p>上記の反復するディスパッチの自然な拡張として、型の階層が定義された集合とは無関係に型の集合に対するディスパッチを行う層を追加することがあります。 そのような集合を構築するには、問題としている型に対する<code>合併型</code>を書けばいいですが、 <code>合併型</code>は生成後に変更できないので、この集合は拡張できません。 しかし、拡張可能な集合は、<a href="https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633">&quot;Holy-trait&quot;</a>とよくよばれるデザインパターンを使ってプログラム可能です。</p><!--
 This pattern is implemented by defining a generic function which
 computes a different singleton value (or type) for each trait-set to which the
 function arguments may belong to.  If this function is pure there is
@@ -525,7 +529,7 @@ the best algorithm (see [Abstract Array Interface](@ref man-interface-array)).
 This means that each subtype does not need to implement a custom version of `map`,
 since the generic definitions + trait classes will enable the system to select the fastest version.
 Here a toy implementation of `map` illustrating the trait-based dispatch:
---><pre><code class="language-julia">map(f, a::AbstractArray, b::AbstractArray) = map(Base.IndexStyle(a, b), f, a, b)
+--><p>このパターンでは、汎化関数の定義を実装します。 この汎化関数は、各引数が所属可能なトレイトの集合ごとに異なるシングルトンの値(または型)を算出するものです。 この関数が純粋である場合、通常のディスパッチと比較してパフォーマンス上全く影響はありません。</p><p>前のセクションでは、実装の詳細をごまかしていた<a href="../base/collections.html#Base.map"><code>map</code></a>や<a href="../base/base.html#Base.promote"><code>promote</code></a>は、共にこのトレイトを使って動作しています。</p><p><code>map</code>の実装などで、行列に対して反復を行う場合に、重要な問題は、データに対してどういう順序を使って渡り歩くかということです。 <code>AbstractArray</code>のサブタイプを<a href="../base/arrays.html#Base.IndexStyle"><code>Base.IndexStyle</code></a>トレイトを使って実装する時、 他の<code>map</code>などの関数は、この情報に基づいて最善のアルゴリズムを選ぶようにディスパッチを行うことができます。 （<a href="interfaces.html#man-interface-array-1">抽象配列インターフェイス</a>参照） これは、サブタイプそれぞれが独自の<code>map</code>の変種の実装を行う必要はないことを意味します。 というのも、汎化的な定義の<code>+</code>トレイトのクラスによって、システムが最速のバージョンを選択できるからです。 トレイトに基づくディスパッチの解説用に<code>map</code>の実装のおもちゃ版を示します。</p><pre><code class="language-julia">map(f, a::AbstractArray, b::AbstractArray) = map(Base.IndexStyle(a, b), f, a, b)
 # generic implementation:
 map(::Base.IndexCartesian, f, a::AbstractArray, b::AbstractArray) = ...
 # linear-indexing implementation (faster)
@@ -537,7 +541,7 @@ compute the operation given the two types of the operands.
 This makes it possible to reduce the problem of implementing every function for every pair of possible type arguments,
 to the much smaller problem of implementing a conversion operation from each type to a common type,
 plus a table of preferred pair-wise promotion rules.
---><p>`<a href="### Output-type computation"></a></p><h3><a class="nav-anchor" id="出力型の算出-1" href="#出力型の算出-1">出力型の算出</a></h3><!--
+--><p>このトレイトに基づく方式は、スカラーの<code>+</code>に対する<a href="../base/base.html#Base.promote"><code>promote</code></a>のしくみにも採用されています。 これに使われる<a href="../base/base.html#Base.promote_type"><code>promote_type</code></a>は、２種類の被演算子最適な共通の型を、の与えられた演算から算出して返します。 これによって、すべての関数に対して、引数の取りうる型の組み合わせすべてに対する実装を行うという問題を、 それぞれの型から共通の型への変換を実装し、組み合わせごとの望ましい昇格規則の表を作るという、より小さな問題に縮小できます。</p><p>`<a href="### Output-type computation"></a></p><h3><a class="nav-anchor" id="出力型の算出-1" href="#出力型の算出-1">出力型の算出</a></h3><!--
 The discussion of trait-based promotion provides a transition into our next design pattern:
 computing the output element type for a matrix operation.
 
@@ -548,14 +552,14 @@ we use the [`promote_type`](@ref) function to compute the desired output type.
 For more complex functions on matrices, it may be necessary to compute the expected return
 type for a more complex sequence of operations.
 This is often performed by the following steps:
---><!--
+--><p>トレイトに基づく昇格の議論から次のデザインパターンに移行します。 行列演算に対する出力要素の型の算出です。</p><p>足し算のような原始的な演算に対しては、<a href="../base/base.html#Base.promote_type"><code>promote_type</code></a>関数を使って望まれる出力の型を算出します。 （以前に、<code>+</code>を呼び出した時に起こる<code>promote</code>の呼び出しでこの動作を見ました）</p><p>もっと行列に対する関数が複雑な場合は、期待する型の戻り値を算出するために、もっと複雑ない一連の操作が必要かもしれません。 これは次のような段階を経てよく実行されます。</p><!--
 1. Write a small function `op` that expresses the set of operations performed by the kernel of the algorithm.
 2. Compute the element type `R` of the result matrix as `promote_op(op, argument_types...)`,
    where `argument_types` is computed from `eltype` applied to each input array.
 3. Build the output matrix as `similar(R, dims)`, where `dims` are the desired dimensions of the output array.
---><!--
+--><p>1.アルゴリズムの中核で行われる操作の集合を表す小さな関数<code>op</code>を書く。 2.計算結果の行列の要素の型<code>R</code>を、<code>promote_op(op, argument_types...)</code>を使って計算する。 ここで<code>argument_types</code>は<code>eltype</code>を入力行列それぞれに適用して算出する。 3.<code>similar(R, dims)</code>によって出力行列を構成する。<code>dims</code>は出力行列に望まれる次元とする。</p><!--
 For a more specific example, a generic square-matrix multiply pseudo-code might look like:
---><pre><code class="language-julia">function matmul(a::AbstractMatrix, b::AbstractMatrix)
+--><p>更に具体的な例として、以下のような汎化的な正方行列の掛け算の擬似コードは、以下のようになります。</p><pre><code class="language-julia">function matmul(a::AbstractMatrix, b::AbstractMatrix)
     op = (ai, bi) -&gt; ai * bi + ai * bi
 
     ## this is insufficient because it assumes `one(eltype(a))` is constructable:
@@ -602,7 +606,7 @@ from the rest of the body of the larger kernel.
 
 This is a common pattern seen when converting from a larger class of types
 to the one specific argument type that is actually supported by the algorithm:
---><pre><code class="language-julia">complexfunction(arg::Int) = ...
+--><p>コンパイル時間と検査の複雑さを大幅に減少させる方法に、希望する型への変換と計算を分離することがあります。 これにより、変換をインラインで最適化し、のこりの大きな核の本体と独立します。</p><p>型の大きなクラスから実際にアルゴリズムが対応している特定の引数の型に変換する際によく見られるパターンです。</p><pre><code class="language-julia">complexfunction(arg::Int) = ...
 complexfunction(arg::Any) = complexfunction(convert(Int, arg))
 
 matmul(a::T, b::T) = ...
