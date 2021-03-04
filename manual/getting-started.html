@@ -44,7 +44,7 @@ To evaluate expressions written in a source file `file.jl`, write `include("file
 To run code in a file non-interactively, you can give it as the first argument to the `julia`
 command:
 
---><p>対話セッションを終了するには、<code>CTRL-D</code> (コントロールキー<code>^</code>を押しながら<code>d</code>を押す)か、<code>exit()</code>を入力してください。 対話モードの時は、<code>julia</code>のバナーや入力を促すプロンプトが表示されます。 ユーザーが<code>1 + 2</code>のように式全体を入力してからエンターを打つと、対話セッションでは、式が評価され、その値が表示されます。 対話セッションでは、式に続けてセミコロンを打つと、値は表示されません。 変数<code>ans</code>には、表示非表示にかかわらず、一番最後に評価された式の値が、束縛されます。 変数<code>ans</code>が束縛されるのは対話セッション中のみで、他の方法で実行される場合は、束縛されません。</p><p>ソースファイル<code>file.jl</code>中に書かれた式をを評価するには、<code>include(&quot;file.jl&quot;)</code>と書きます。</p><p>ファイル中のコードを非対話的に実行するには、そのファイルをコマンド<code>julia</code>の第1引数として指定します。</p><pre><code class="language-none">$ julia script.jl arg1 arg2...</code></pre><!--
+--><p>対話セッションを終了するには、<code>CTRL-D</code> (コントロールキー<code>^</code>を押しながら<code>d</code>を押す)か、<code>exit()</code>を入力してください。 対話モードの時は、<code>julia</code>のバナーや入力を促すプロンプトが表示されます。 ユーザーが<code>1 + 2</code>のように式全体を入力してからエンターを打つと、対話セッションでは、式が評価され、その値が表示されます。 対話セッションでは、式に続けてセミコロンを打つと、値は表示されません。 変数<code>ans</code>には、表示非表示にかかわらず、一番最後に評価された式の値が、束縛されます。 変数<code>ans</code>が束縛されるのは対話セッション中のみで、他の方法で実行される場合は、束縛されません。</p><p>ソースファイル<code>file.jl</code>中に書かれた式を評価するには、<code>include(&quot;file.jl&quot;)</code>と書きます。</p><p>ファイル中のコードを非対話的に実行するには、そのファイルをコマンド<code>julia</code>の第1引数として指定します。</p><pre><code class="language-none">$ julia script.jl arg1 arg2...</code></pre><!--
 As the example implies, the following command-line arguments to `julia` are interpreted as
 command-line arguments to the program `script.jl`, passed in the global constant `ARGS`. The
 name of the script itself is passed in as the global `PROGRAM_FILE`. Note that `ARGS` is
